@@ -1,0 +1,70 @@
+﻿<Window x:Class="MSSS_SatelliteDataProcessing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MSSS_SatelliteDataProcessing"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,99,592,10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox x:Name="txtStandardDev" HorizontalAlignment="Left" Margin="18,37,0,0" TextWrapping="Wrap" Text="Standard Dev" VerticalAlignment="Top" Width="78"/>
+        <TextBox x:Name="txtMean" HorizontalAlignment="Left" Margin="118,37,0,0" TextWrapping="Wrap" Text="Mean" VerticalAlignment="Top" Width="77"/>
+        <Button x:Name="btnLoadData" Content="Load Sensor Data" HorizontalAlignment="Left" Margin="37,66,0,0" VerticalAlignment="Top" Width="144"/>
+        <Label Content="Sigma" HorizontalAlignment="Left" Margin="37,15,0,0" VerticalAlignment="Top" FontSize="10" FontFamily="Century Gothic"/>
+        <Label Content="Mu" HorizontalAlignment="Left" Margin="144,15,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="10"/>
+
+        <Label Content="Sensor A" HorizontalAlignment="Left" Margin="236,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="20"/>
+        <Label Content="Binary Search Iterative" HorizontalAlignment="Left" Margin="236,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
+        <TextBox HorizontalAlignment="Left" Margin="241,102,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="241,80,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
+
+        <Label Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="236,137,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
+        <TextBox HorizontalAlignment="Left" Margin="241,179,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="241,157,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
+
+        <Label Content="Search Target" HorizontalAlignment="Left" Margin="236,218,0,0" VerticalAlignment="Top" Width="81" FontSize="10"/>
+        <TextBox HorizontalAlignment="Left" Margin="317,222,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.5,0.705" FontSize="10"/>
+
+        <Label Content="Selection Sort" HorizontalAlignment="Left" Margin="236,262,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
+        <TextBox HorizontalAlignment="Left" Margin="241,303,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
+        <Button Content="Sort" HorizontalAlignment="Left" Margin="241,281,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
+
+        <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="236,333,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
+        <TextBox HorizontalAlignment="Left" Margin="241,374,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
+        <Button Content="Sort" HorizontalAlignment="Left" Margin="241,352,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="384,60,298,10"/>
+
+        <Label Content="Sensor B" HorizontalAlignment="Left" Margin="526,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="20" RenderTransformOrigin="0.539,0.957"/>
+        <Label Content="Binary Search Iterative" HorizontalAlignment="Left" Margin="524,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
+        <TextBox HorizontalAlignment="Left" Margin="529,102,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="529,80,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
+
+        <Label Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="524,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
+        <TextBox HorizontalAlignment="Left" Margin="529,175,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="529,153,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
+
+        <Label Content="Search Target" HorizontalAlignment="Left" Margin="526,214,0,0" VerticalAlignment="Top" Width="81" FontSize="10"/>
+        <TextBox HorizontalAlignment="Left" Margin="607,218,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.5,0.705" FontSize="10"/>
+
+        <Label Content="Selection Sort" HorizontalAlignment="Left" Margin="524,258,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
+        <TextBox HorizontalAlignment="Left" Margin="529,299,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
+        <Button Content="Sort" HorizontalAlignment="Left" Margin="529,277,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
+
+        <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="524,329,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
+        <TextBox HorizontalAlignment="Left" Margin="529,370,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
+        <Button Content="Sort" HorizontalAlignment="Left" Margin="529,348,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="672,60,10,10"/>
+
+
+
+
+
+    </Grid>
+</Window>
