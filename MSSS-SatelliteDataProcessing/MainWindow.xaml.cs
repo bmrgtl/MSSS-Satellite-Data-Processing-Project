@@ -18,6 +18,7 @@ namespace MSSS_SatelliteDataProcessing
     /// </summary>
     public partial class MainWindow : Window
     {
+        // 4.1 Global LinkedList<double> that stores data for Sensor A and B
         LinkedList<double> SensorA { get; } = new LinkedList<double>();
         LinkedList<double> SensorB { get; } = new LinkedList<double>();
         public MainWindow()
@@ -26,13 +27,18 @@ namespace MSSS_SatelliteDataProcessing
             DataContext = this;
         }
 
+        // 4.2 Method to load data for Sensor A and B using Galileo6
         private void LoadData()
         {
+            // creates new instance of ReadData class from Galileo6 to generate data for SensorA and SensorB
             ReadData data = new ReadData();
 
+            // parses standard deviation and mean from textboxes to double variables
             double sigma = double.Parse(txtSigma.Text);
             double mu = double.Parse(txtMean.Text);
 
+            // generates 400 data points for Sensor A and B using Galileo6
+            // and adds them to their respective linked list
             for (int i = 0; i <= 400; i++)
             {
                 SensorA.AddLast(data.SensorA(mu, sigma));
@@ -40,11 +46,16 @@ namespace MSSS_SatelliteDataProcessing
             }
         }
 
-        private void btnLoadData_Click(object sender, RoutedEventArgs e)
+        // 4.3 Method to display Sensor A and B data in ListBox and ListView
+        private void ShowAllSensorData()
         {
-            LoadData();
+            // clear existing items before displaying new data
+            lstSensorA.Items.Clear();
+            lstSensorB.Items.Clear();
+            lvSensorData.Items.Clear();
 
-            for(int i = 0; i < SensorA.Count && i< SensorB.Count; i++)
+            // populates ListBox and ListView with data from Sensor A and B linked lists
+            for (int i = 0; i < SensorA.Count && i < SensorB.Count; i++)
             {
                 lstSensorA.Items.Add(SensorA.ElementAt(i));
                 lstSensorB.Items.Add(SensorB.ElementAt(i));
@@ -55,7 +66,13 @@ namespace MSSS_SatelliteDataProcessing
                     SensorB = SensorB.ElementAt(i)
                 });
             }
+        }
 
+        // 4.4 On click event handler that loads and shows sensor data
+        private void btnLoadData_Click(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+            ShowAllSensorData();
         }
     }
 }
