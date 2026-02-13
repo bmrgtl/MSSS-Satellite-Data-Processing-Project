@@ -3,22 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:MSSS_SatelliteDataProcessing"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
     <Grid>
-        <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,99,592,10">
+        <!-- Two column ListView for Sensor Data-->
+        <ListView x:Name="lvSensorData" Margin="10,99,592,10" Width="200" FontFamily="Century Gothic" FontSize="11">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Sensor A" DisplayMemberBinding="{Binding SensorA}" Width="85"/>
+                    <GridViewColumn Header="Sensor B" DisplayMemberBinding="{Binding SensorB}" Width="85"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox x:Name="txtStandardDev" HorizontalAlignment="Left" Margin="18,37,0,0" TextWrapping="Wrap" Text="Standard Dev" VerticalAlignment="Top" Width="78"/>
-        <TextBox x:Name="txtMean" HorizontalAlignment="Left" Margin="118,37,0,0" TextWrapping="Wrap" Text="Mean" VerticalAlignment="Top" Width="77"/>
-        <Button x:Name="btnLoadData" Content="Load Sensor Data" HorizontalAlignment="Left" Margin="37,66,0,0" VerticalAlignment="Top" Width="144"/>
-        <Label Content="Sigma" HorizontalAlignment="Left" Margin="37,15,0,0" VerticalAlignment="Top" FontSize="10" FontFamily="Century Gothic"/>
-        <Label Content="Mu" HorizontalAlignment="Left" Margin="144,15,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="10"/>
+
+        <!-- Numeric Up Down Control for Standard Deviation -->
+        <Label Content="Sigma" HorizontalAlignment="Left" Margin="14,19,0,0" VerticalAlignment="Top" FontSize="10" FontFamily="Century Gothic"/>
+        <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,37,0,0" Height="20" Width="78">
+            <wpfx:IntegerUpDown x:Name="txtSigma" Value="100" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left" 
+                                            FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" />
+        </Border>
+
+        <!-- Numeric Input for Mean -->
+        <Label Content="Mu" HorizontalAlignment="Left" Margin="114,19,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="10"/>
+        <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="118,37,0,0" Height="20" Width="78">
+            <wpfx:IntegerUpDown x:Name="txtMean" Value="100" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left"
+                                    FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" />
+        </Border>
+        
+        <!-- Button to Load Sensor Data -->
+        <Button x:Name="btnLoadData" Content="Load Sensor Data" FontFamily="Century Gothic" FontSize="10" HorizontalAlignment="Left" Margin="37,66,0,0" VerticalAlignment="Top" Height="20" Width="144" Click="btnLoadData_Click"/>
+        
+        
 
         <Label Content="Sensor A" HorizontalAlignment="Left" Margin="236,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="20"/>
         <Label Content="Binary Search Iterative" HorizontalAlignment="Left" Margin="236,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
@@ -39,7 +57,7 @@
         <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="236,333,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
         <TextBox HorizontalAlignment="Left" Margin="241,374,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
         <Button Content="Sort" HorizontalAlignment="Left" Margin="241,352,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="384,60,298,10"/>
+        <ListBox x:Name="lstSensorA" Margin="384,60,298,10"/>
 
         <Label Content="Sensor B" HorizontalAlignment="Left" Margin="526,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="20" RenderTransformOrigin="0.539,0.957"/>
         <Label Content="Binary Search Iterative" HorizontalAlignment="Left" Margin="524,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
@@ -60,7 +78,7 @@
         <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="524,329,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
         <TextBox HorizontalAlignment="Left" Margin="529,370,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
         <Button Content="Sort" HorizontalAlignment="Left" Margin="529,348,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
-        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="672,60,10,10"/>
+        <ListBox x:Name="lstSensorB" Margin="672,60,10,10"/>
 
 
 

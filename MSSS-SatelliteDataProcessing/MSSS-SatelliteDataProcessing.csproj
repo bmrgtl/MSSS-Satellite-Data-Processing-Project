@@ -9,4 +9,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Galileo6">
+      <HintPath>Galileo6.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

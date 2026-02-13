@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:MSSS_SatelliteDataProcessing"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Center Text in List View -->
+        <Style TargetType="ListViewItem">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
     </Application.Resources>
 </Application>
