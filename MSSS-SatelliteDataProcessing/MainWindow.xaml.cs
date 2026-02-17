@@ -93,35 +93,74 @@ namespace MSSS_SatelliteDataProcessing
         // 4.7 Selection Sort
         private void SelectionSort(LinkedList<double> sensorData)
         {
+            
             int min = 0;
             int max = NumberOfNodes(sensorData);
 
+            // iterates through linked list
             for (int i = 0; i < max - 1; i++)
             {
                 min = i;
 
+                // finds index of minimum value in the unsorted portion of the list
                 for (int j = i+1; j < max; j++)
                 {
+                    // compares current minimum with the next element in the list
                     if (sensorData.ElementAt(j) < sensorData.ElementAt(min))
                     {
+                        // updates minimum index if a smaller value is found
                         min = j;
                     }
                 }
 
+                // swaps the minimum value with the first element of the unsorted portion of the list
                 LinkedListNode<double> currentMin = sensorData.Find(sensorData.ElementAt(min));
+                // finds the node corresponding to the current minimum value and the current index i
                 LinkedListNode<double> currentI = sensorData.Find(sensorData.ElementAt(i));
 
+                // swaps the values of the current minimum node and the current index node
                 var temp = currentMin.Value;
+                // updates the value of the current minimum node to the value of the current index node
                 currentMin.Value = currentI.Value;
                 currentI.Value = temp;
-            } // Placeholder for selection sort implementation
+            }
         }
+
+        private void InsertionSort(LinkedList<double> sensorData)
+        {
+            int max = NumberOfNodes(sensorData);
+
+            for (int i = 0; i < max - 1; i++)
+            {
+                for(int j = i+1; j > 0; j--)
+                {
+                    if(sensorData.ElementAt(j-1) > sensorData.ElementAt(j))
+                    {
+                        LinkedListNode<double> current = sensorData.Find(sensorData.ElementAt(j));
+                        LinkedListNode<double> previous = sensorData.Find(sensorData.ElementAt(j-1));
+                        
+                        var temp = current.Value;
+                        current.Value = previous.Value;
+                        previous.Value = temp;
+                    }
+                }
+            }
+        }
+
 
         private void btnSelectionSort_Click(object sender, RoutedEventArgs e)
         {
             SelectionSort(SensorA);
             DisplayListboxData(SensorA, lstSensorA);
         }
-        // 
+
+        private void btnInsertionSort_Click(object sender, RoutedEventArgs e)
+        {
+            InsertionSort(SensorA);
+            DisplayListboxData(SensorA, lstSensorA);
+        }
+
+
+
     }
 }

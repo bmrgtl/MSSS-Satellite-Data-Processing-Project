@@ -56,7 +56,7 @@
 
         <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="236,333,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
         <TextBox HorizontalAlignment="Left" Margin="241,374,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
-        <Button Content="Sort" HorizontalAlignment="Left" Margin="241,352,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
+        <Button Content="Sort" HorizontalAlignment="Left" Margin="241,352,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnInsertionSort_Click"/>
         <ListBox x:Name="lstSensorA" Margin="384,60,298,10" FontFamily="Century Gothic"/>
 
         <Label Content="Sensor B" HorizontalAlignment="Left" Margin="526,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="20" RenderTransformOrigin="0.539,0.957"/>
