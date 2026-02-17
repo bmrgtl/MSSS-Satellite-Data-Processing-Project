@@ -73,6 +73,31 @@ namespace MSSS_SatelliteDataProcessing
         {
             LoadData();
             ShowAllSensorData();
+            DisplayListboxData(SensorA, lstSensorA);
+            DisplayListboxData(SensorB, lstSensorB);
+        }
+
+        // 4.5 Number of Nodes
+        private int NumberOfNodes(LinkedList<double> sensorData)
+        {
+            return sensorData.Count;
+        }
+
+        // 4.6 DisplayListboxData
+        private void DisplayListboxData(LinkedList<double> sensorData, ListBox listBox)
+        {
+            listBox.Items.Clear();
+            foreach (var data in sensorData)
+            {
+                listBox.Items.Add(data);
+            }
+        }
+
+        // 4.7 Selection Sort
+        private bool SelectionSort(LinkedList<double> sensorData)
+        {
+            
+            return true; // Placeholder for selection sort implementation
         }
     }
 }
