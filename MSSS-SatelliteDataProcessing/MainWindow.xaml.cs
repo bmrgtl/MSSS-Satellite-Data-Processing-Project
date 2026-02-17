@@ -54,12 +54,9 @@ namespace MSSS_SatelliteDataProcessing
             lstSensorB.Items.Clear();
             lvSensorData.Items.Clear();
 
-            // populates ListBox and ListView with data from Sensor A and B linked lists
+            // populates ListView with data from Sensor A and B linked lists
             for (int i = 0; i < SensorA.Count && i < SensorB.Count; i++)
             {
-                lstSensorA.Items.Add(SensorA.ElementAt(i));
-                lstSensorB.Items.Add(SensorB.ElementAt(i));
-
                 lvSensorData.Items.Add(new
                 {
                     SensorA = SensorA.ElementAt(i),
@@ -77,13 +74,13 @@ namespace MSSS_SatelliteDataProcessing
             DisplayListboxData(SensorB, lstSensorB);
         }
 
-        // 4.5 Number of Nodes
+        // 4.5 Number of Nodes: returns number of nodes in the linked list
         private int NumberOfNodes(LinkedList<double> sensorData)
         {
             return sensorData.Count;
         }
 
-        // 4.6 DisplayListboxData
+        // 4.6 DisplayListboxData: shows data from linked list in the specified listbox
         private void DisplayListboxData(LinkedList<double> sensorData, ListBox listBox)
         {
             listBox.Items.Clear();
@@ -94,10 +91,37 @@ namespace MSSS_SatelliteDataProcessing
         }
 
         // 4.7 Selection Sort
-        private bool SelectionSort(LinkedList<double> sensorData)
+        private void SelectionSort(LinkedList<double> sensorData)
         {
-            
-            return true; // Placeholder for selection sort implementation
+            int min = 0;
+            int max = NumberOfNodes(sensorData);
+
+            for (int i = 0; i < max - 1; i++)
+            {
+                min = i;
+
+                for (int j = i+1; j < max; j++)
+                {
+                    if (sensorData.ElementAt(j) < sensorData.ElementAt(min))
+                    {
+                        min = j;
+                    }
+                }
+
+                LinkedListNode<double> currentMin = sensorData.Find(sensorData.ElementAt(min));
+                LinkedListNode<double> currentI = sensorData.Find(sensorData.ElementAt(i));
+
+                var temp = currentMin.Value;
+                currentMin.Value = currentI.Value;
+                currentI.Value = temp;
+            } // Placeholder for selection sort implementation
         }
+
+        private void btnSelectionSort_Click(object sender, RoutedEventArgs e)
+        {
+            SelectionSort(SensorA);
+            DisplayListboxData(SensorA, lstSensorA);
+        }
+        // 
     }
 }
