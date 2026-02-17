@@ -10,11 +10,11 @@
     
     <Grid>
         <!-- Two column ListView for Sensor Data-->
-        <ListView x:Name="lvSensorData" Margin="10,99,592,10" Width="200" FontFamily="Century Gothic" FontSize="11">
+        <ListView x:Name="lvSensorData" Margin="10,99,592,10" FontFamily="Century Gothic" FontSize="11">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Sensor A" DisplayMemberBinding="{Binding SensorA}" Width="85"/>
-                    <GridViewColumn Header="Sensor B" DisplayMemberBinding="{Binding SensorB}" Width="85"/>
+                    <GridViewColumn Header="Sensor A" DisplayMemberBinding="{Binding SensorA}" Width="80"/>
+                    <GridViewColumn Header="Sensor B" DisplayMemberBinding="{Binding SensorB}" Width="80"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -22,15 +22,15 @@
         <!-- Numeric Up Down Control for Standard Deviation -->
         <Label Content="Sigma" HorizontalAlignment="Left" Margin="14,19,0,0" VerticalAlignment="Top" FontSize="10" FontFamily="Century Gothic"/>
         <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,37,0,0" Height="20" Width="78">
-            <wpfx:IntegerUpDown x:Name="txtSigma" Value="100" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left" 
+            <wpfx:IntegerUpDown x:Name="txtSigma" Value="10" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left" 
                                 FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" Minimum="10" Maximum="20"/>
         </Border>
 
         <!-- Numeric Input for Mean -->
         <Label Content="Mu" HorizontalAlignment="Left" Margin="114,19,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="10"/>
         <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="118,37,0,0" Height="20" Width="78">
-            <wpfx:IntegerUpDown x:Name="txtMean" Value="100" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left"
-                                    FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" />
+            <wpfx:IntegerUpDown x:Name="txtMean" Value="50" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left"
+                                    FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" Minimum="35" Maximum="75" />
         </Border>
         
         <!-- Button to Load Sensor Data -->
@@ -41,14 +41,14 @@
         <Label Content="Sensor A" HorizontalAlignment="Left" Margin="236,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="20"/>
         <Label Content="Binary Search Iterative" HorizontalAlignment="Left" Margin="236,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
         <TextBox HorizontalAlignment="Left" Margin="241,102,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
-        <Button Content="Search" HorizontalAlignment="Left" Margin="241,80,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="241,80,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnBinarySearchIterative_Click"/>
 
         <Label Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="236,137,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
         <TextBox HorizontalAlignment="Left" Margin="241,179,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
         <Button Content="Search" HorizontalAlignment="Left" Margin="241,157,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
 
         <Label Content="Search Target" HorizontalAlignment="Left" Margin="236,218,0,0" VerticalAlignment="Top" Width="81" FontSize="10"/>
-        <TextBox HorizontalAlignment="Left" Margin="317,222,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.5,0.705" FontSize="10"/>
+        <TextBox x:Name="txtTarget" HorizontalAlignment="Left" Margin="317,222,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.5,0.705" FontSize="10"/>
 
         <Label Content="Selection Sort" HorizontalAlignment="Left" Margin="236,262,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
         <TextBox HorizontalAlignment="Left" Margin="241,303,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>

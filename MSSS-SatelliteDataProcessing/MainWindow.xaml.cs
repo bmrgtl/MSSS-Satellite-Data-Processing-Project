@@ -126,6 +126,7 @@ namespace MSSS_SatelliteDataProcessing
             }
         }
 
+        // 4.8 Insertion Sort
         private void InsertionSort(LinkedList<double> sensorData)
         {
             int max = NumberOfNodes(sensorData);
@@ -147,6 +148,40 @@ namespace MSSS_SatelliteDataProcessing
             }
         }
 
+        // 4.9 Binary Search Iterative
+        private int BinarySearchIterative(LinkedList<double> sensorData, double target,  int min, int max)
+        {
+            while (min <= max - 1)
+            {
+                int mid = (min + max) / 2;
+                if (target == sensorData.ElementAt(mid))
+                    return mid;
+                else if (target < sensorData.ElementAt(mid))
+                    max = mid - 1;
+                else
+                    min = mid + 1;
+            }
+
+            return min;
+        }
+
+        // 4.10 Binary Search Recursive
+        private int BinarySearchRecursive(LinkedList<double> sensorData, double target, int min, int max)
+        {
+            if (min <= max - 1)
+            {
+                int mid = (min + max) / 2;
+                if (target == sensorData.ElementAt(mid))
+                    return mid;
+                else if (target < sensorData.ElementAt(mid))
+                    return BinarySearchRecursive(sensorData, target, min, mid - 1);
+                else
+                    return BinarySearchRecursive(sensorData, target, mid + 1, max);
+            }
+
+            return min;
+        }
+
 
         private void btnSelectionSort_Click(object sender, RoutedEventArgs e)
         {
@@ -160,6 +195,21 @@ namespace MSSS_SatelliteDataProcessing
             DisplayListboxData(SensorA, lstSensorA);
         }
 
+        private void btnBinarySearchIterative_Click(object sender, RoutedEventArgs e)
+        {
+            double target = double.Parse(txtTarget.Text);
+            int index = BinarySearchIterative(SensorA, target, 0, NumberOfNodes(SensorA));
+            //highlights the found index in the listbox if target is found, otherwise shows a message box indicating target not found
+            if (SensorA.ElementAt(index) == target)
+            {
+                lstSensorA.SelectedIndex = index;
+                lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
+            }
+            else
+            {
+                MessageBox.Show("Target not found in Sensor A data.");
+            }
+        }
 
 
     }
