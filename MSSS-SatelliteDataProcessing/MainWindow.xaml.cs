@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Diagnostics;
 
 namespace MSSS_SatelliteDataProcessing
 {
@@ -107,7 +108,7 @@ namespace MSSS_SatelliteDataProcessing
                 min = i;
 
                 // finds index of minimum value in the unsorted portion of the list
-                for (int j = i+1; j < max; j++)
+                for (int j = i + 1; j < max; j++)
                 {
                     // compares current minimum with the next element in the list
                     if (sensorData.ElementAt(j) < sensorData.ElementAt(min))
@@ -138,13 +139,13 @@ namespace MSSS_SatelliteDataProcessing
 
             for (int i = 0; i < max - 1; i++)
             {
-                for(int j = i+1; j > 0; j--)
+                for (int j = i + 1; j > 0; j--)
                 {
-                    if(sensorData.ElementAt(j-1) > sensorData.ElementAt(j))
+                    if (sensorData.ElementAt(j - 1) > sensorData.ElementAt(j))
                     {
                         LinkedListNode<double> current = sensorData.Find(sensorData.ElementAt(j));
-                        LinkedListNode<double> previous = sensorData.Find(sensorData.ElementAt(j-1));
-                        
+                        LinkedListNode<double> previous = sensorData.Find(sensorData.ElementAt(j - 1));
+
                         var temp = current.Value;
                         current.Value = previous.Value;
                         previous.Value = temp;
@@ -156,9 +157,9 @@ namespace MSSS_SatelliteDataProcessing
         }
 
         // 4.9 Binary Search Iterative
-        private int BinarySearchIterative(LinkedList<double> sensorData, double target,  int min, int max)
-        {   
-            
+        private int BinarySearchIterative(LinkedList<double> sensorData, double target, int min, int max)
+        {
+
             int closestIndex = min;
 
             while (min <= max - 1)
@@ -167,7 +168,7 @@ namespace MSSS_SatelliteDataProcessing
 
                 // updates closest index if the current middle value is closer
                 // to the target than the previously recorded closest value
-                if (Math.Abs(sensorData.ElementAt(mid) - target) < 
+                if (Math.Abs(sensorData.ElementAt(mid) - target) <
                     Math.Abs(sensorData.ElementAt(closestIndex) - target))
                 {
                     closestIndex = mid;
@@ -191,7 +192,7 @@ namespace MSSS_SatelliteDataProcessing
             if (min <= max - 1)
             {
                 int mid = (min + max) / 2;
-                    
+
                 if (target == sensorData.ElementAt(mid))
                     return mid;
                 else if (target < sensorData.ElementAt(mid))
@@ -208,7 +209,7 @@ namespace MSSS_SatelliteDataProcessing
 
             if (max < 0)
             {
-               return 0;
+                return 0;
             }
 
             if (Math.Abs(sensorData.ElementAt(min) - target) <
@@ -224,10 +225,18 @@ namespace MSSS_SatelliteDataProcessing
         private void btnBinarySearchIterativeA_Click(object sender, RoutedEventArgs e)
         {
 
-
+            // 4.11.1 checks if Sensor A data is sorted before performing binary search
             if (isSensorASorted == true)
             {
-                double target = double.Parse(txtTargetA.Text);
+                // 4.14 Input validation: ensures target value entered is a valid number
+                if (!double.TryParse(txtTargetA.Text, out double target))
+                {
+                    MessageBox.Show("Please enter a valid number for the target value.");
+                    return;
+                }
+
+
+
                 int index = BinarySearchIterative(SensorA, target, 0, NumberOfNodes(SensorA));
                 lstSensorA.SelectedIndex = index;
                 lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
@@ -247,6 +256,10 @@ namespace MSSS_SatelliteDataProcessing
             if (isSensorASorted == true)
             {
                 double target = double.Parse(txtTargetA.Text);
+
+
+
+
                 int index = BinarySearchRecursive(SensorA, target, 0, NumberOfNodes(SensorA));
                 lstSensorA.SelectedIndex = index;
                 lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
@@ -258,17 +271,50 @@ namespace MSSS_SatelliteDataProcessing
             }
         }
 
-        // 4.12 Method for Sensor A Selection Sort
+        //4.11.3 Method for Sensor B Binary Search Iterative
+        private void btnBinarySearchIterativeB_Click(object sender, RoutedEventArgs e)
+        {
+            if (isSensorBSorted == true)
+            {
+                double target = double.Parse(txtTargetB.Text);
+                int index = BinarySearchIterative(SensorB, target, 0, NumberOfNodes(SensorB));
+                lstSensorB.SelectedIndex = index;
+                lstSensorB.ScrollIntoView(lstSensorB.SelectedItem);
+            }
+            else
+            {
+                MessageBox.Show("Please sort the data before performing binary search.");
+            }
+        }
+
+        //4.11.4 Method for Sensor B Binary Search Recursive
+        private void btnBinarySearchRecursiveB_Click(object sender, RoutedEventArgs e)
+        {
+            if (isSensorBSorted == true)
+            {
+                double target = double.Parse(txtTargetB.Text);
+                int index = BinarySearchRecursive(SensorB, target, 0, NumberOfNodes(SensorB));
+                lstSensorB.SelectedIndex = index;
+                lstSensorB.ScrollIntoView(lstSensorB.SelectedItem);
+            }
+            else
+            {
+                MessageBox.Show("Please sort the data before performing binary search.");
+            }
+        }
+
+        // 4.12.1 Method for Sensor A Selection Sort
         private void btnSelectionSortA_Click(object sender, RoutedEventArgs e)
         {
-            if(SelectionSort(SensorA))
+            if (SelectionSort(SensorA))
             {
                 DisplayListboxData(SensorA, lstSensorA);
                 isSensorASorted = true;
             }
-                
+
         }
 
+        //4.12.2 Method for Sensor A Insertion Sort
         private void btnInsertionSortA_Click(object sender, RoutedEventArgs e)
         {
             if (InsertionSort(SensorA))
@@ -278,8 +324,31 @@ namespace MSSS_SatelliteDataProcessing
             }
         }
 
-        
+        //4.12.3 Method for Sensor B Selection Sort
+        private void btnSelectionSortB_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectionSort(SensorB))
+            {
+                DisplayListboxData(SensorB, lstSensorB);
+                isSensorBSorted = true;
+            }
+        }
 
+        //4.12.4 Method for Sensor B Insertion Sort
+        private void btnInsertionSortB_Click(object sender, RoutedEventArgs e)
+        {
+            if (InsertionSort(SensorB))
+            {
+                DisplayListboxData(SensorB, lstSensorB);
+                isSensorBSorted = true;
+            }
+        }
 
+        private void NumericOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            // Regular expression to allow only numeric input (including decimal point)
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^0-9.]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
 }

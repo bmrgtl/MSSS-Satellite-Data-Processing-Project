@@ -26,7 +26,7 @@
                                 FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" Minimum="10" Maximum="20"/>
         </Border>
 
-        <!-- Numeric Input for Mean -->
+        <!-- Numeric Up Down Control for Mean -->
         <Label Content="Mu" HorizontalAlignment="Left" Margin="114,19,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="10"/>
         <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="118,37,0,0" Height="20" Width="78">
             <wpfx:IntegerUpDown x:Name="txtMean" Value="50" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left"
@@ -38,46 +38,64 @@
         
         <!-- Sensor A Controls -->
         <Label Content="Sensor A" HorizontalAlignment="Left" Margin="236,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="20"/>
+        
+        <!-- Sensor A: Binary Search Iterative Controls -->
         <Label Content="Binary Search Iterative" HorizontalAlignment="Left" Margin="236,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox HorizontalAlignment="Left" Margin="241,102,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic"/>
+        <TextBox HorizontalAlignment="Left" Margin="241,102,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
         <Button Content="Search" HorizontalAlignment="Left" Margin="241,80,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnBinarySearchIterativeA_Click" FontFamily="Century Gothic"/>
 
+        <!-- Sensor A: Binary Search Recursive Controls -->
         <Label Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="236,137,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox HorizontalAlignment="Left" Margin="241,179,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic"/>
+        <TextBox HorizontalAlignment="Left" Margin="241,179,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
         <Button Content="Search" HorizontalAlignment="Left" Margin="241,157,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnBinarySearchRecursiveA_Click" FontFamily="Century Gothic"/>
 
+        <!-- Sensor A: Search Target -->
         <Label Content="Search Target" HorizontalAlignment="Left" Margin="236,218,0,0" VerticalAlignment="Top" Width="81" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtTargetA" HorizontalAlignment="Left" Margin="317,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.5,0.705" FontSize="10" FontFamily="Century Gothic"/>
+        <TextBox x:Name="txtTargetA" HorizontalAlignment="Left" Margin="317,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.5,0.705" FontSize="10" FontFamily="Century Gothic"
+                 PreviewTextInput="NumericOnly_PreviewTextInput"/>
 
+        <!-- Sensor A: Selection Sort Controls -->
         <Label Content="Selection Sort" HorizontalAlignment="Left" Margin="236,262,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox HorizontalAlignment="Left" Margin="241,303,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic"/>
+        <TextBox HorizontalAlignment="Left" Margin="241,303,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
         <Button Content="Sort" HorizontalAlignment="Left" Margin="241,281,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnSelectionSortA_Click" FontFamily="Century Gothic"/>
 
+        <!-- Sensor A: Insertion Sort Controls -->
         <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="236,333,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox HorizontalAlignment="Left" Margin="241,374,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic"/>
+        <TextBox HorizontalAlignment="Left" Margin="241,374,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
         <Button Content="Sort" HorizontalAlignment="Left" Margin="241,352,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnInsertionSortA_Click"  FontFamily="Century Gothic"/>
+        
+        <!-- Sensor A Listbox -->
         <ListBox x:Name="lstSensorA" Margin="384,60,298,10" FontFamily="Century Gothic"/>
 
         <!-- Sensor B Controls -->
         <Label Content="Sensor B" HorizontalAlignment="Left" Margin="526,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="20" RenderTransformOrigin="0.539,0.957"/>
+
+        <!-- Sensor B: Binary Search Iterative Controls -->
         <Label Content="Binary Search Iterative" HorizontalAlignment="Left" Margin="524,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox HorizontalAlignment="Left" Margin="529,102,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic"/>
+        <TextBox HorizontalAlignment="Left" Margin="529,102,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only-->
         <Button Content="Search" HorizontalAlignment="Left" Margin="529,80,0,0" VerticalAlignment="Top" Width="72" FontSize="10" FontFamily="Century Gothic"/>
 
+        <!-- Sensor B: Binary Search Recursive Controls -->
         <Label Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="524,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox HorizontalAlignment="Left" Margin="529,175,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic"/>
+        <TextBox HorizontalAlignment="Left" Margin="529,175,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
         <Button Content="Search" HorizontalAlignment="Left" Margin="529,153,0,0" VerticalAlignment="Top" Width="72" FontSize="10" FontFamily="Century Gothic"/>
 
+        <!-- Sensor B: Search Target -->
         <Label Content="Search Target" HorizontalAlignment="Left" Margin="526,214,0,0" VerticalAlignment="Top" Width="81" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtTargetB" HorizontalAlignment="Left" Margin="607,218,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.5,0.705" FontSize="10" FontFamily="Century Gothic"/>
+        <TextBox x:Name="txtTargetB" HorizontalAlignment="Left" Margin="607,218,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.5,0.705" FontSize="10" FontFamily="Century Gothic"
+                 PreviewTextInput="NumericOnly_PreviewTextInput"/>
 
-        <Label x:Name="___No_Name_" Content="Selection Sort" HorizontalAlignment="Left" Margin="524,258,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox HorizontalAlignment="Left" Margin="529,299,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic"/>
+        <!-- Sensor B: Selection Sort -->
+        <Label Content="Selection Sort" HorizontalAlignment="Left" Margin="524,258,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
+        <TextBox HorizontalAlignment="Left" Margin="529,299,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
         <Button Content="Sort" HorizontalAlignment="Left" Margin="529,277,0,0" VerticalAlignment="Top" Width="72" FontSize="10" FontFamily="Century Gothic"/>
 
+        <!-- Sensor B: Insertion Sort -->
         <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="524,329,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox HorizontalAlignment="Left" Margin="529,370,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic"/>
+        <TextBox HorizontalAlignment="Left" Margin="529,370,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
         <Button Content="Sort" HorizontalAlignment="Left" Margin="529,348,0,0" VerticalAlignment="Top" Width="72" FontSize="10" FontFamily="Century Gothic"/>
+        
+        <!-- Sensor B Listbox -->
         <ListBox x:Name="lstSensorB" Margin="672,60,10,10" FontFamily="Century Gothic"/>
 
 
