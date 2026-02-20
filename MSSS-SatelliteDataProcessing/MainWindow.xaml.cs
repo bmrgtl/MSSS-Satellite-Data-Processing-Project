@@ -151,9 +151,22 @@ namespace MSSS_SatelliteDataProcessing
         // 4.9 Binary Search Iterative
         private int BinarySearchIterative(LinkedList<double> sensorData, double target,  int min, int max)
         {
+            
+            int closestIndex = min;
+
             while (min <= max - 1)
             {
                 int mid = (min + max) / 2;
+
+                // updates closest index if the current middle value is closer
+                // to the target than the previously recorded closest value
+                if (Math.Abs(sensorData.ElementAt(mid) - target) < 
+                    Math.Abs(sensorData.ElementAt(closestIndex) - target))
+                {
+                    closestIndex = mid;
+                }
+
+                // binary search
                 if (target == sensorData.ElementAt(mid))
                     return mid;
                 else if (target < sensorData.ElementAt(mid))
@@ -162,7 +175,7 @@ namespace MSSS_SatelliteDataProcessing
                     min = mid + 1;
             }
 
-            return min;
+            return closestIndex;
         }
 
         // 4.10 Binary Search Recursive
@@ -171,6 +184,7 @@ namespace MSSS_SatelliteDataProcessing
             if (min <= max - 1)
             {
                 int mid = (min + max) / 2;
+                    
                 if (target == sensorData.ElementAt(mid))
                     return mid;
                 else if (target < sensorData.ElementAt(mid))
@@ -179,7 +193,24 @@ namespace MSSS_SatelliteDataProcessing
                     return BinarySearchRecursive(sensorData, target, mid + 1, max);
             }
 
-            return min;
+            // nearest neighbor logic: compares the values at the minimum and maximum indices to the target value
+            if (min >= NumberOfNodes(sensorData))
+            {
+                min = NumberOfNodes(sensorData) - 1;
+            }
+
+            if (max < 0)
+            {
+               return 0;
+            }
+
+            if (Math.Abs(sensorData.ElementAt(min) - target) <
+                Math.Abs(sensorData.ElementAt(max) - target))
+            {
+                return min;
+            }
+            else
+                return max;
         }
 
 
@@ -199,16 +230,17 @@ namespace MSSS_SatelliteDataProcessing
         {
             double target = double.Parse(txtTarget.Text);
             int index = BinarySearchIterative(SensorA, target, 0, NumberOfNodes(SensorA));
-            //highlights the found index in the listbox if target is found, otherwise shows a message box indicating target not found
-            if (SensorA.ElementAt(index) == target)
-            {
-                lstSensorA.SelectedIndex = index;
-                lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
-            }
-            else
-            {
-                MessageBox.Show("Target not found in Sensor A data.");
-            }
+            lstSensorA.SelectedIndex = index;
+            lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
+            
+        }
+
+        private void btnBinarySearchRecursive_Click(object sender, RoutedEventArgs e)
+        {
+            double target = double.Parse(txtTarget.Text);
+            int index = BinarySearchRecursive(SensorA, target, 0, NumberOfNodes(SensorA));
+            lstSensorA.SelectedIndex = index;
+            lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
         }
 
 

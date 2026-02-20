@@ -45,7 +45,7 @@
 
         <Label Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="236,137,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10"/>
         <TextBox HorizontalAlignment="Left" Margin="241,179,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="10"/>
-        <Button Content="Search" HorizontalAlignment="Left" Margin="241,157,0,0" VerticalAlignment="Top" Width="72" FontSize="10"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="241,157,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnBinarySearchRecursive_Click"/>
 
         <Label Content="Search Target" HorizontalAlignment="Left" Margin="236,218,0,0" VerticalAlignment="Top" Width="81" FontSize="10"/>
         <TextBox x:Name="txtTarget" HorizontalAlignment="Left" Margin="317,222,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.5,0.705" FontSize="10"/>
