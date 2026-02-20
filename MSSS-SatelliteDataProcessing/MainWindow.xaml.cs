@@ -264,8 +264,9 @@ namespace MSSS_SatelliteDataProcessing
                 // 4.11.1 Highlight +/-2 indices around index of search 
                 int start = Math.Max(0, index - 2);
                 int end = Math.Min((NumberOfNodes(SensorA) - 1), index + 2);
+                lstSensorA.SelectedItems.Clear(); // Clear previous selections
 
-                for(int i = start; i <= end; i++)
+                for (int i = start; i <= end; i++)
                 {
                     if (i >= 0 && i < lstSensorA.Items.Count)
                     {
@@ -308,6 +309,7 @@ namespace MSSS_SatelliteDataProcessing
                 // Highlight +/-2 indices around index of search
                 int start = Math.Max(0, index - 2);
                 int end = Math.Min((NumberOfNodes(SensorA) - 1), index + 2);
+                lstSensorA.SelectedItems.Clear(); // Clear previous selections
 
                 for (int i = start; i <= end; i++)
                 {
@@ -351,6 +353,7 @@ namespace MSSS_SatelliteDataProcessing
                 // Highlight +/-2 indices around index of search
                 int start = Math.Max(0, index - 2);
                 int end = Math.Min((NumberOfNodes(SensorB) - 1), index + 2);
+                lstSensorB.SelectedItems.Clear(); // Clear previous selections
 
                 for (int i = start; i <= end; i++)
                 {
@@ -394,6 +397,7 @@ namespace MSSS_SatelliteDataProcessing
                 // Highlight +/-2 indices around index of search
                 int start = Math.Max(0, index - 2);
                 int end = Math.Min((NumberOfNodes(SensorB) - 1), index + 2);
+                lstSensorB.SelectedItems.Clear(); // Clear previous selections
 
                 for (int i = start; i <= end; i++)
                 {
