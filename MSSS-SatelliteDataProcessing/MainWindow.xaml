@@ -65,7 +65,7 @@
         <Button Content="Sort" HorizontalAlignment="Left" Margin="241,352,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnInsertionSortA_Click"  FontFamily="Century Gothic"/>
         
         <!-- Sensor A Listbox -->
-        <ListBox x:Name="lstSensorA" SelectionMode="Multiple" Margin="384,60,298,10" FontFamily="Century Gothic"/>
+        <ListBox x:Name="lstSensorA" SelectionMode="Multiple" Margin="384,60,298,10" FontFamily="Century Gothic" ItemContainerStyle="{StaticResource ChangeSelectedItemBackground}"/>
 
         <!-- Sensor B Controls -->
         <Label Content="Sensor B" HorizontalAlignment="Left" Margin="526,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="20" RenderTransformOrigin="0.539,0.957"/>
@@ -96,7 +96,7 @@
         <Button Content="Sort" HorizontalAlignment="Left" Margin="529,348,0,0" VerticalAlignment="Top" Width="72" FontSize="10" FontFamily="Century Gothic"/>
         
         <!-- Sensor B Listbox -->
-        <ListBox x:Name="lstSensorB" SelectionMode="Multiple" Margin="672,60,10,10" FontFamily="Century Gothic"/>
+        <ListBox x:Name="lstSensorB" SelectionMode="Multiple" Margin="672,60,10,10" FontFamily="Century Gothic" ItemContainerStyle="{StaticResource ChangeSelectedItemBackground}"/>
         
 
 
