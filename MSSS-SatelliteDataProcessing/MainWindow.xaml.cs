@@ -228,18 +228,37 @@ namespace MSSS_SatelliteDataProcessing
             // 4.11.1 checks if Sensor A data is sorted before performing binary search
             if (isSensorASorted == true)
             {
-                // 4.14 Input validation: ensures target value entered is a valid number
+                // Input validation: ensures target value entered is a valid number
                 if (!double.TryParse(txtTargetA.Text, out double target))
                 {
                     MessageBox.Show("Please enter a valid number for the target value.");
                     return;
                 }
 
+                // 4.11.1 Measure ticks taken for binary search iterative method
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
 
-
+                // start Binary Search
                 int index = BinarySearchIterative(SensorA, target, 0, NumberOfNodes(SensorA));
-                lstSensorA.SelectedIndex = index;
-                lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
+                stopwatch.Stop();
+
+                // 4.11.1 Highlight +/-2 indices around index of search 
+                int start = Math.Max(0, index - 2);
+                int end = Math.Min((NumberOfNodes(SensorA) - 1), index + 2);
+
+                for(int i = start; i <= end; i++)
+                {
+                    if (i >= 0 && i < lstSensorA.Items.Count)
+                    {
+                        lstSensorA.SelectedItems.Add(lstSensorA.Items.GetItemAt(i));
+                    }
+                }
+
+                lstSensorA.ScrollIntoView(lstSensorA.Items[index]);
+
+                // 4.11.1 Display ticks taken for binary search iterative method in the corresponding textbox
+                txtBinaryIterativeA.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
             }
 
             else
@@ -252,17 +271,38 @@ namespace MSSS_SatelliteDataProcessing
         //4.11.2 Method for Sensor A Binary Search Recursive
         private void btnBinarySearchRecursiveA_Click(object sender, RoutedEventArgs e)
         {
-
+            // 4.11.2 checks if Sensor A data is sorted before performing binary search
             if (isSensorASorted == true)
             {
-                double target = double.Parse(txtTargetA.Text);
+                // input validation: ensures target value entered is a valid number
+                if (!double.TryParse(txtTargetA.Text, out double target))
+                {
+                    MessageBox.Show("Please enter a valid number for the target value.");
+                    return;
+                }
 
-
-
-
+                // 4.11.2 Measure ticks taken for binary search recursive method
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                stopwatch.Start();
                 int index = BinarySearchRecursive(SensorA, target, 0, NumberOfNodes(SensorA));
-                lstSensorA.SelectedIndex = index;
-                lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
+                stopwatch.Stop();
+
+                // Highlight +/-2 indices around index of search
+                int start = Math.Max(0, index - 2);
+                int end = Math.Min((NumberOfNodes(SensorA) - 1), index + 2);
+
+                for (int i = start; i <= end; i++)
+                {
+                    if (i >= 0 && i < lstSensorA.Items.Count)
+                    {
+                        lstSensorA.SelectedItems.Add(lstSensorA.Items.GetItemAt(i));
+                    }
+                }
+
+                lstSensorA.ScrollIntoView(lstSensorA.Items[index]);
+
+                // 4.11.2 Display ticks taken for binary search recursive method in the corresponding textbox
+                txtBinaryRecursiveA.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
             }
 
             else
@@ -274,12 +314,38 @@ namespace MSSS_SatelliteDataProcessing
         //4.11.3 Method for Sensor B Binary Search Iterative
         private void btnBinarySearchIterativeB_Click(object sender, RoutedEventArgs e)
         {
+            // 4.11.3 checks if Sensor B data is sorted before performing binary search
             if (isSensorBSorted == true)
             {
-                double target = double.Parse(txtTargetB.Text);
+                // input validation: ensures target value entered is a valid number
+                if (!double.TryParse(txtTargetB.Text, out double target))
+                {
+                    MessageBox.Show("Please enter a valid number for the target value.");
+                    return;
+                }
+
+                // 4.11.3 Measure ticks taken for binary search iterative method
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                stopwatch.Start();
                 int index = BinarySearchIterative(SensorB, target, 0, NumberOfNodes(SensorB));
-                lstSensorB.SelectedIndex = index;
-                lstSensorB.ScrollIntoView(lstSensorB.SelectedItem);
+                stopwatch.Stop();
+
+                // Highlight +/-2 indices around index of search
+                int start = Math.Max(0, index - 2);
+                int end = Math.Min((NumberOfNodes(SensorB) - 1), index + 2);
+
+                for (int i = start; i <= end; i++)
+                {
+                    if (i >= 0 && i < lstSensorB.Items.Count)
+                    {
+                        lstSensorB.SelectedItems.Add(lstSensorB.Items.GetItemAt(i));
+                    }
+                }
+
+                lstSensorB.ScrollIntoView(lstSensorB.Items[index]);
+
+                // 4.11.3 Display ticks taken for binary search iterative method in the corresponding textbox
+                txtBinaryIterativeB.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
             }
             else
             {
@@ -290,12 +356,39 @@ namespace MSSS_SatelliteDataProcessing
         //4.11.4 Method for Sensor B Binary Search Recursive
         private void btnBinarySearchRecursiveB_Click(object sender, RoutedEventArgs e)
         {
+            // 4.11.4 checks if Sensor B data is sorted before performing binary search
             if (isSensorBSorted == true)
             {
-                double target = double.Parse(txtTargetB.Text);
+                // input validation: ensures target value entered is a valid number
+                if (!double.TryParse(txtTargetB.Text, out double target))
+                {
+                    MessageBox.Show("Please enter a valid number for the target value.");
+                    return;
+                }
+
+                // 4.11.4 Measure ticks taken for binary search recursive method
+                Stopwatch stopwatch = Stopwatch.StartNew();
+                stopwatch.Start();
                 int index = BinarySearchRecursive(SensorB, target, 0, NumberOfNodes(SensorB));
-                lstSensorB.SelectedIndex = index;
-                lstSensorB.ScrollIntoView(lstSensorB.SelectedItem);
+                stopwatch.Stop();
+
+
+                // Highlight +/-2 indices around index of search
+                int start = Math.Max(0, index - 2);
+                int end = Math.Min((NumberOfNodes(SensorB) - 1), index + 2);
+
+                for (int i = start; i <= end; i++)
+                {
+                    if (i >= 0 && i < lstSensorB.Items.Count)
+                    {
+                        lstSensorB.SelectedItems.Add(lstSensorB.Items.GetItemAt(i));
+                    }
+                }
+
+                lstSensorB.ScrollIntoView(lstSensorB.Items[index]);
+
+                // 4.11.4 Display ticks taken for binary search recursive method in the corresponding textbox
+                txtBinaryRecursiveB.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
             }
             else
             {
@@ -306,44 +399,76 @@ namespace MSSS_SatelliteDataProcessing
         // 4.12.1 Method for Sensor A Selection Sort
         private void btnSelectionSortA_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectionSort(SensorA))
-            {
-                DisplayListboxData(SensorA, lstSensorA);
-                isSensorASorted = true;
-            }
+            // 4.12.1 Measures time taken to sort Sensor A data using selection sort method
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            stopwatch.Start();
+            SelectionSort(SensorA);
+            stopwatch.Stop();
+
+            // 4.12.1 Displays time taken to sort Sensor A data using selection sort method in the corresponding textbox
+            txtSelectionSortA.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+
+            // 4.12.1 Displays sorted Sensor A data in the corresponding listbox
+            DisplayListboxData(SensorA, lstSensorA);
+            isSensorASorted = true;
 
         }
 
         //4.12.2 Method for Sensor A Insertion Sort
         private void btnInsertionSortA_Click(object sender, RoutedEventArgs e)
         {
-            if (InsertionSort(SensorA))
-            {
-                DisplayListboxData(SensorA, lstSensorA);
-                isSensorASorted = true;
-            }
+            // 4.12.2 Measures time taken to sort Sensor A data using insertion sort method
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            stopwatch.Start();
+            InsertionSort(SensorA);
+            stopwatch.Stop();
+
+            // 4.12.2 Displays time taken to sort Sensor A data using insertion sort method in the corresponding textbox
+            txtInsertionSortA.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+
+            // 4.12.2 Displays sorted Sensor A data in the corresponding listbox
+            DisplayListboxData(SensorA, lstSensorA);
+            isSensorASorted = true;
+           
         }
 
         //4.12.3 Method for Sensor B Selection Sort
         private void btnSelectionSortB_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectionSort(SensorB))
-            {
-                DisplayListboxData(SensorB, lstSensorB);
-                isSensorBSorted = true;
-            }
+            // 4.12.3 Measures time taken to sort Sensor B data using selection sort method
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            stopwatch.Start();
+            SelectionSort(SensorB);
+            stopwatch.Stop();
+
+            // 4.12.3 Displays time taken to sort Sensor B data using selection sort method in the corresponding textbox
+            txtSelectionSortB.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+
+            // 4.12.3 Displays sorted Sensor B data in the corresponding listbox
+            DisplayListboxData(SensorB, lstSensorB);
+            isSensorBSorted = true;
+            
         }
 
         //4.12.4 Method for Sensor B Insertion Sort
         private void btnInsertionSortB_Click(object sender, RoutedEventArgs e)
         {
-            if (InsertionSort(SensorB))
-            {
-                DisplayListboxData(SensorB, lstSensorB);
-                isSensorBSorted = true;
-            }
+            // 4.12.4 Measures time taken to sort Sensor B data using insertion sort method
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            stopwatch.Start();
+            InsertionSort(SensorB);
+            stopwatch.Stop();
+
+            // 4.12.4 Displays time taken to sort Sensor B data using insertion sort method in the corresponding textbox
+            txtInsertionSortB.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+
+            //4.12.4 Displays sorted Sensor B data in the corresponding listbox
+            DisplayListboxData(SensorB, lstSensorB);
+            isSensorBSorted = true;
+            
         }
 
+        // 4.14 Allow numeric input only for search targets
         private void NumericOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             // Regular expression to allow only numeric input (including decimal point)
