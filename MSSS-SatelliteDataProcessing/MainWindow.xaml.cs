@@ -21,6 +21,11 @@ namespace MSSS_SatelliteDataProcessing
         // 4.1 Global LinkedList<double> that stores data for Sensor A and B
         LinkedList<double> SensorA { get; } = new LinkedList<double>();
         LinkedList<double> SensorB { get; } = new LinkedList<double>();
+
+        // Check if data is sorted
+        bool isSensorASorted = false;
+        bool isSensorBSorted = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -91,9 +96,8 @@ namespace MSSS_SatelliteDataProcessing
         }
 
         // 4.7 Selection Sort
-        private void SelectionSort(LinkedList<double> sensorData)
+        private bool SelectionSort(LinkedList<double> sensorData)
         {
-            
             int min = 0;
             int max = NumberOfNodes(sensorData);
 
@@ -124,10 +128,11 @@ namespace MSSS_SatelliteDataProcessing
                 currentMin.Value = currentI.Value;
                 currentI.Value = temp;
             }
+            return true;
         }
 
         // 4.8 Insertion Sort
-        private void InsertionSort(LinkedList<double> sensorData)
+        private bool InsertionSort(LinkedList<double> sensorData)
         {
             int max = NumberOfNodes(sensorData);
 
@@ -146,11 +151,13 @@ namespace MSSS_SatelliteDataProcessing
                     }
                 }
             }
+
+            return true;
         }
 
         // 4.9 Binary Search Iterative
         private int BinarySearchIterative(LinkedList<double> sensorData, double target,  int min, int max)
-        {
+        {   
             
             int closestIndex = min;
 
@@ -213,35 +220,65 @@ namespace MSSS_SatelliteDataProcessing
                 return max;
         }
 
-
-        private void btnSelectionSort_Click(object sender, RoutedEventArgs e)
+        // 4.11.1 Method for Sensor A Binary Search Iterative
+        private void btnBinarySearchIterativeA_Click(object sender, RoutedEventArgs e)
         {
-            SelectionSort(SensorA);
-            DisplayListboxData(SensorA, lstSensorA);
+
+
+            if (isSensorASorted == true)
+            {
+                double target = double.Parse(txtTargetA.Text);
+                int index = BinarySearchIterative(SensorA, target, 0, NumberOfNodes(SensorA));
+                lstSensorA.SelectedIndex = index;
+                lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
+            }
+
+            else
+            {
+                MessageBox.Show("Please sort the data before performing binary search.");
+            }
+
         }
 
-        private void btnInsertionSort_Click(object sender, RoutedEventArgs e)
+        //4.11.2 Method for Sensor A Binary Search Recursive
+        private void btnBinarySearchRecursiveA_Click(object sender, RoutedEventArgs e)
         {
-            InsertionSort(SensorA);
-            DisplayListboxData(SensorA, lstSensorA);
+
+            if (isSensorASorted == true)
+            {
+                double target = double.Parse(txtTargetA.Text);
+                int index = BinarySearchRecursive(SensorA, target, 0, NumberOfNodes(SensorA));
+                lstSensorA.SelectedIndex = index;
+                lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
+            }
+
+            else
+            {
+                MessageBox.Show("Please sort the data before performing binary search.");
+            }
         }
 
-        private void btnBinarySearchIterative_Click(object sender, RoutedEventArgs e)
+        // 4.12 Method for Sensor A Selection Sort
+        private void btnSelectionSortA_Click(object sender, RoutedEventArgs e)
         {
-            double target = double.Parse(txtTarget.Text);
-            int index = BinarySearchIterative(SensorA, target, 0, NumberOfNodes(SensorA));
-            lstSensorA.SelectedIndex = index;
-            lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
-            
+            if(SelectionSort(SensorA))
+            {
+                DisplayListboxData(SensorA, lstSensorA);
+                isSensorASorted = true;
+            }
+                
         }
 
-        private void btnBinarySearchRecursive_Click(object sender, RoutedEventArgs e)
+        private void btnInsertionSortA_Click(object sender, RoutedEventArgs e)
         {
-            double target = double.Parse(txtTarget.Text);
-            int index = BinarySearchRecursive(SensorA, target, 0, NumberOfNodes(SensorA));
-            lstSensorA.SelectedIndex = index;
-            lstSensorA.ScrollIntoView(lstSensorA.SelectedItem);
+            if (InsertionSort(SensorA))
+            {
+                DisplayListboxData(SensorA, lstSensorA);
+                isSensorASorted = true;
+            }
         }
+
+        
 
 
     }
