@@ -22,15 +22,15 @@
         <!-- Numeric Up Down Control for Standard Deviation -->
         <Label Content="Sigma" HorizontalAlignment="Left" Margin="14,19,0,0" VerticalAlignment="Top" FontSize="10" FontFamily="Century Gothic"/>
         <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,37,0,0" Height="20" Width="78">
-            <wpfx:IntegerUpDown x:Name="txtSigma" Value="10" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left" 
-                                FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" Minimum="10" Maximum="20"/>
+            <wpfx:IntegerUpDown x:Name="txtSigma" Text="10" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left" 
+                                FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" Minimum="10" Maximum="20"/> <!-- 4.13 Sigma Minimum=10, Maximum=20, Default=10-->
         </Border>
 
         <!-- Numeric Up Down Control for Mean -->
         <Label Content="Mu" HorizontalAlignment="Left" Margin="114,19,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="10"/>
         <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="118,37,0,0" Height="20" Width="78">
-            <wpfx:IntegerUpDown x:Name="txtMean" Value="50" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left"
-                                    FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" Minimum="35" Maximum="75" />
+            <wpfx:IntegerUpDown x:Name="txtMean" Text="50" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left"
+                                    FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" Minimum="35" Maximum="75"/> <!--4.13 Mean Minimum=35, Maximum=75, Default=50-->
         </Border>
         
         <!-- Button to Load Sensor Data -->
@@ -96,7 +96,8 @@
         <Button Content="Sort" HorizontalAlignment="Left" Margin="529,348,0,0" VerticalAlignment="Top" Width="72" FontSize="10" FontFamily="Century Gothic"/>
         
         <!-- Sensor B Listbox -->
-        <ListBox x:Name="lstSensorB" Margin="672,60,10,10" FontFamily="Century Gothic"/>
+        <ListBox x:Name="lstSensorB" SelectionMode="Multiple" Margin="672,60,10,10" FontFamily="Century Gothic"/>
+        
 
 
 

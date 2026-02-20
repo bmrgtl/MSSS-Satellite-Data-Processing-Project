@@ -36,12 +36,30 @@ namespace MSSS_SatelliteDataProcessing
         // 4.2 Method to load data for Sensor A and B using Galileo6
         private void LoadData()
         {
+            // clear existing data in linked lists before loading new data
+            SensorA.Clear();
+            SensorB.Clear();
+
             // creates new instance of ReadData class from Galileo6 to generate data for SensorA and SensorB
             ReadData data = new ReadData();
 
-            // parses standard deviation and mean from textboxes to double variables
+            // 4.13 Sigma Range (10-20; Default 10)
             double sigma = double.Parse(txtSigma.Text);
+            if(sigma < 10 || sigma > 20)
+            {
+                MessageBox.Show("Default Value 10 is used. Please enter a value for standard deviation between 10 and 20.");
+                sigma = 10; // default value if input is out of range
+                txtSigma.Value = 10;
+            }
+
+            // 4.13 Mean Range (35-75; Default 50)
             double mu = double.Parse(txtMean.Text);
+            if(mu < 35 || mu > 75)
+            {
+                MessageBox.Show("Default Value 50 is used. Please enter a value for mean between 35 and 75.");
+                mu = 50; // default value if input is out of range
+                txtMean.Value = 50;
+            }
 
             // generates 400 data points for Sensor A and B using Galileo6
             // and adds them to their respective linked list
@@ -475,5 +493,6 @@ namespace MSSS_SatelliteDataProcessing
             System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^0-9.]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
     }
 }
