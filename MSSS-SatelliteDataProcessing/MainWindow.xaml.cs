@@ -211,7 +211,7 @@ namespace MSSS_SatelliteDataProcessing
             return min; 
         }
         
-        //4.11.1 highlight all occurrences
+        //4.11 Highlight all occurrences of target
         private void HighlightAllOccurrences(LinkedList<double> SensorData, ListBox lstSensor, int index, double target)
         {
             lstSensor.SelectedItems.Clear(); // Clear previous selections
@@ -295,7 +295,7 @@ namespace MSSS_SatelliteDataProcessing
                 int index = BinarySearchRecursive(SensorA, target, 0, NumberOfNodes(SensorA));
                 stopwatch.Stop();
 
-                // 4.11.1 Display ticks taken for binary search iterative method in the corresponding textbox
+                // 4.11.2 Display ticks taken for binary search iterative method in the corresponding textbox
                 txtBinaryRecursiveA.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
 
                 if (index == 0)
@@ -303,7 +303,7 @@ namespace MSSS_SatelliteDataProcessing
                     MessageBox.Show("Value Not Found.");
                 }
 
-                // 4.11.1 Highlight all values that are equal to the target (decimals excluded).
+                // 4.11.2 Highlight all values that are equal to the target (decimals excluded).
                 HighlightAllOccurrences(SensorA, lstSensorA, index, target);
             }
 
@@ -332,7 +332,7 @@ namespace MSSS_SatelliteDataProcessing
                 int index = BinarySearchIterative(SensorB, target, 0, NumberOfNodes(SensorB));
                 stopwatch.Stop();
 
-                // 4.11.1 Display ticks taken for binary search iterative method in the corresponding textbox
+                // 4.11.3 Display ticks taken for binary search iterative method in the corresponding textbox
                 txtBinaryIterativeB.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
 
                 if (index == 0)
@@ -340,7 +340,7 @@ namespace MSSS_SatelliteDataProcessing
                     MessageBox.Show("Value Not Found.");
                 }
 
-                // 4.11.1 Highlight all values that are equal to the target (decimals excluded).
+                // 4.11.3 Highlight all values that are equal to the target (decimals excluded).
                 HighlightAllOccurrences(SensorB, lstSensorB, index, target);
             }
             else
@@ -369,7 +369,7 @@ namespace MSSS_SatelliteDataProcessing
                 stopwatch.Stop();
 
 
-                // 4.11.1 Display ticks taken for binary search iterative method in the corresponding textbox
+                // 4.11.4 Display ticks taken for binary search iterative method in the corresponding textbox
                 txtBinaryRecursiveB.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
 
                 if (index == 0)
