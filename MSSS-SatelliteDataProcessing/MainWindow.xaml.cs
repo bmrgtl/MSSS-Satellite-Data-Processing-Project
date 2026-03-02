@@ -226,14 +226,14 @@ namespace MSSS_SatelliteDataProcessing
             int lastOccurrence = index + 1;
 
             // find the first value
-            while (Math.Floor(SensorData.ElementAt(firstOccurrence)) == target)
+            while (firstOccurrence >=0 && Math.Floor(SensorData.ElementAt(firstOccurrence)) == target)
             {
                 lstSensor.SelectedItems.Add(lstSensor.Items.GetItemAt(firstOccurrence));
                 firstOccurrence--;
             }
 
             // find the last value
-            while (Math.Floor(SensorData.ElementAt(lastOccurrence)) == target)
+            while (lastOccurrence < SensorData.Count && Math.Floor(SensorData.ElementAt(lastOccurrence)) == target)
             {
                 lstSensor.SelectedItems.Add(lstSensor.Items.GetItemAt(lastOccurrence));
                 lastOccurrence++;
