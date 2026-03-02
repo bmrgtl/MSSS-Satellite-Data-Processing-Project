@@ -177,31 +177,20 @@ namespace MSSS_SatelliteDataProcessing
         // 4.9 Binary Search Iterative
         private int BinarySearchIterative(LinkedList<double> sensorData, double target, int min, int max)
         {
-
-            int closestIndex = min;
-
             while (min <= max - 1)
             {
                 int mid = (min + max) / 2;
 
-                // updates closest index if the current middle value is closer
-                // to the target than the previously recorded closest value
-                if (Math.Abs(sensorData.ElementAt(mid) - target) <
-                    Math.Abs(sensorData.ElementAt(closestIndex) - target))
-                {
-                    closestIndex = mid;
-                }
-
                 // binary search
-                if (target == sensorData.ElementAt(mid))
+                if (target == Math.Floor(sensorData.ElementAt(mid)))
                     return mid;
-                else if (target < sensorData.ElementAt(mid))
+                else if (target < Math.Floor(sensorData.ElementAt(mid)))
                     max = mid - 1;
                 else
                     min = mid + 1;
             }
 
-            return closestIndex;
+            return min;
         }
 
         // 4.10 Binary Search Recursive
@@ -211,32 +200,38 @@ namespace MSSS_SatelliteDataProcessing
             {
                 int mid = (min + max) / 2;
 
-                if (target == sensorData.ElementAt(mid))
+                if (target == Math.Floor(sensorData.ElementAt(mid)))
                     return mid;
-                else if (target < sensorData.ElementAt(mid))
+                else if (target < Math.Floor(sensorData.ElementAt(mid)))
                     return BinarySearchRecursive(sensorData, target, min, mid - 1);
                 else
                     return BinarySearchRecursive(sensorData, target, mid + 1, max);
             }
 
-            // nearest neighbor logic: compares the values at the minimum and maximum indices to the target value
-            if (min >= NumberOfNodes(sensorData))
+            return min; 
+        }
+        
+        //4.11 Highlight all occurrences of target
+        private void HighlightAllOccurrences(LinkedList<double> SensorData, ListBox lstSensor, int index, double target)
+        {
+            lstSensor.SelectedItems.Clear(); // Clear previous selections
+            int firstOccurrence = index;
+            int lastOccurrence = index + 1;
+            // find the first value
+            while (Math.Floor(SensorData.ElementAt(firstOccurrence)) == target)
             {
-                min = NumberOfNodes(sensorData) - 1;
+                lstSensor.SelectedItems.Add(lstSensor.Items.GetItemAt(firstOccurrence));
+                firstOccurrence--;
             }
 
-            if (max < 0)
+            // find the last value
+            while (Math.Floor(SensorData.ElementAt(lastOccurrence)) == target)
             {
-                return 0;
+                lstSensor.SelectedItems.Add(lstSensor.Items.GetItemAt(lastOccurrence));
+                lastOccurrence++;
             }
 
-            if (Math.Abs(sensorData.ElementAt(min) - target) <
-                Math.Abs(sensorData.ElementAt(max) - target))
-            {
-                return min;
-            }
-            else
-                return max;
+            lstSensor.ScrollIntoView(lstSensor.Items[lastOccurrence-1]);
         }
 
         // 4.11.1 Method for Sensor A Binary Search Iterative
@@ -261,23 +256,17 @@ namespace MSSS_SatelliteDataProcessing
                 int index = BinarySearchIterative(SensorA, target, 0, NumberOfNodes(SensorA));
                 stopwatch.Stop();
 
-                // 4.11.1 Highlight +/-2 indices around index of search 
-                int start = Math.Max(0, index - 2);
-                int end = Math.Min((NumberOfNodes(SensorA) - 1), index + 2);
-                lstSensorA.SelectedItems.Clear(); // Clear previous selections
-
-                for (int i = start; i <= end; i++)
-                {
-                    if (i >= 0 && i < lstSensorA.Items.Count)
-                    {
-                        lstSensorA.SelectedItems.Add(lstSensorA.Items.GetItemAt(i));
-                    }
-                }
-
-                lstSensorA.ScrollIntoView(lstSensorA.Items[index]);
-
                 // 4.11.1 Display ticks taken for binary search iterative method in the corresponding textbox
                 txtBinaryIterativeA.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
+
+                if(index == 0)
+                {
+                    MessageBox.Show("Value Not Found.");
+                }
+
+                // 4.11.1 Highlight all values that are equal to the target (decimals excluded).
+                HighlightAllOccurrences(SensorA, lstSensorA, index, target);
+                                
             }
 
             else
@@ -306,23 +295,16 @@ namespace MSSS_SatelliteDataProcessing
                 int index = BinarySearchRecursive(SensorA, target, 0, NumberOfNodes(SensorA));
                 stopwatch.Stop();
 
-                // Highlight +/-2 indices around index of search
-                int start = Math.Max(0, index - 2);
-                int end = Math.Min((NumberOfNodes(SensorA) - 1), index + 2);
-                lstSensorA.SelectedItems.Clear(); // Clear previous selections
+                // 4.11.2 Display ticks taken for binary search iterative method in the corresponding textbox
+                txtBinaryRecursiveA.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
 
-                for (int i = start; i <= end; i++)
+                if (index == 0)
                 {
-                    if (i >= 0 && i < lstSensorA.Items.Count)
-                    {
-                        lstSensorA.SelectedItems.Add(lstSensorA.Items.GetItemAt(i));
-                    }
+                    MessageBox.Show("Value Not Found.");
                 }
 
-                lstSensorA.ScrollIntoView(lstSensorA.Items[index]);
-
-                // 4.11.2 Display ticks taken for binary search recursive method in the corresponding textbox
-                txtBinaryRecursiveA.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
+                // 4.11.2 Highlight all values that are equal to the target (decimals excluded).
+                HighlightAllOccurrences(SensorA, lstSensorA, index, target);
             }
 
             else
@@ -350,23 +332,16 @@ namespace MSSS_SatelliteDataProcessing
                 int index = BinarySearchIterative(SensorB, target, 0, NumberOfNodes(SensorB));
                 stopwatch.Stop();
 
-                // Highlight +/-2 indices around index of search
-                int start = Math.Max(0, index - 2);
-                int end = Math.Min((NumberOfNodes(SensorB) - 1), index + 2);
-                lstSensorB.SelectedItems.Clear(); // Clear previous selections
-
-                for (int i = start; i <= end; i++)
-                {
-                    if (i >= 0 && i < lstSensorB.Items.Count)
-                    {
-                        lstSensorB.SelectedItems.Add(lstSensorB.Items.GetItemAt(i));
-                    }
-                }
-
-                lstSensorB.ScrollIntoView(lstSensorB.Items[index]);
-
                 // 4.11.3 Display ticks taken for binary search iterative method in the corresponding textbox
                 txtBinaryIterativeB.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
+
+                if (index == 0)
+                {
+                    MessageBox.Show("Value Not Found.");
+                }
+
+                // 4.11.3 Highlight all values that are equal to the target (decimals excluded).
+                HighlightAllOccurrences(SensorB, lstSensorB, index, target);
             }
             else
             {
@@ -394,23 +369,16 @@ namespace MSSS_SatelliteDataProcessing
                 stopwatch.Stop();
 
 
-                // Highlight +/-2 indices around index of search
-                int start = Math.Max(0, index - 2);
-                int end = Math.Min((NumberOfNodes(SensorB) - 1), index + 2);
-                lstSensorB.SelectedItems.Clear(); // Clear previous selections
+                // 4.11.4 Display ticks taken for binary search iterative method in the corresponding textbox
+                txtBinaryRecursiveB.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
 
-                for (int i = start; i <= end; i++)
+                if (index == 0)
                 {
-                    if (i >= 0 && i < lstSensorB.Items.Count)
-                    {
-                        lstSensorB.SelectedItems.Add(lstSensorB.Items.GetItemAt(i));
-                    }
+                    MessageBox.Show("Value Not Found.");
                 }
 
-                lstSensorB.ScrollIntoView(lstSensorB.Items[index]);
-
-                // 4.11.4 Display ticks taken for binary search recursive method in the corresponding textbox
-                txtBinaryRecursiveB.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
+                // 4.11.4 Highlight all values that are equal to the target (decimals excluded).
+                HighlightAllOccurrences(SensorB, lstSensorB, index, target);
             }
             else
             {
