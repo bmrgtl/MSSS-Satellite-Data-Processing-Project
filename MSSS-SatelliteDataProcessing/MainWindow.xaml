@@ -6,102 +6,148 @@
         xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:MSSS_SatelliteDataProcessing"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    
-    <Grid>
-        <!-- Two column ListView for Sensor Data-->
-        <ListView x:Name="lvSensorData" Margin="10,99,592,10" FontFamily="Century Gothic" FontSize="11">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Sensor A" DisplayMemberBinding="{Binding SensorA}" Width="80"/>
-                    <GridViewColumn Header="Sensor B" DisplayMemberBinding="{Binding SensorB}" Width="80"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        Title="Marlin Space Science Systems" Height="780" Width="1280"
+        WindowStartupLocation="CenterScreen" Background="Transparent">
 
-        <!-- Numeric Up Down Control for Standard Deviation -->
-        <Label Content="Sigma" HorizontalAlignment="Left" Margin="14,19,0,0" VerticalAlignment="Top" FontSize="10" FontFamily="Century Gothic"/>
-        <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,37,0,0" Height="20" Width="78">
-            <wpfx:IntegerUpDown x:Name="txtSigma" Text="10" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left" 
-                                FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" Minimum="10" Maximum="20"/> <!-- 4.13 Sigma Minimum=10, Maximum=20, Default=10-->
-        </Border>
-
-        <!-- Numeric Up Down Control for Mean -->
-        <Label Content="Mu" HorizontalAlignment="Left" Margin="114,19,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="10"/>
-        <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="118,37,0,0" Height="20" Width="78">
-            <wpfx:IntegerUpDown x:Name="txtMean" Text="50" Padding="10 0 0 0" VerticalAlignment="Center" FontSize="10" Background="Transparent" Height="20" TextAlignment="Left"
-                                    FontFamily="Century Gothic" HorizontalAlignment="Center" Width="78" BorderThickness="0" FormatString="N0" Minimum="35" Maximum="75"/> <!--4.13 Mean Minimum=35, Maximum=75, Default=50-->
-        </Border>
-        
-        <!-- Button to Load Sensor Data -->
-        <Button x:Name="btnLoadData" Content="Load Sensor Data" FontFamily="Century Gothic" FontSize="10" HorizontalAlignment="Left" Margin="37,66,0,0" VerticalAlignment="Top" Height="20" Width="144" Click="btnLoadData_Click"/>
-        
-        <!-- Sensor A Controls -->
-        <Label Content="Sensor A" HorizontalAlignment="Left" Margin="236,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="20"/>
-        
-        <!-- Sensor A: Binary Search Iterative Controls -->
-        <Label Content="Binary Search Iterative" HorizontalAlignment="Left" Margin="236,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtBinaryIterativeA" HorizontalAlignment="Left" Margin="241,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
-        <Button Content="Search" HorizontalAlignment="Left" Margin="241,80,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnBinarySearchIterativeA_Click" FontFamily="Century Gothic"/>
-
-        <!-- Sensor A: Binary Search Recursive Controls -->
-        <Label Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="236,137,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtBinaryRecursiveA" HorizontalAlignment="Left" Margin="241,179,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
-        <Button Content="Search" HorizontalAlignment="Left" Margin="241,157,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnBinarySearchRecursiveA_Click" FontFamily="Century Gothic"/>
-
-        <!-- Sensor A: Search Target -->
-        <Label Content="Search Target" HorizontalAlignment="Left" Margin="236,218,0,0" VerticalAlignment="Top" Width="81" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtTargetA" HorizontalAlignment="Left" Margin="317,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.5,0.705" FontSize="10" FontFamily="Century Gothic"
-                 PreviewTextInput="NumericOnly_PreviewTextInput"/>
-
-        <!-- Sensor A: Selection Sort Controls -->
-        <Label Content="Selection Sort" HorizontalAlignment="Left" Margin="236,262,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtSelectionSortA" HorizontalAlignment="Left" Margin="241,303,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
-        <Button Content="Sort" HorizontalAlignment="Left" Margin="241,281,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnSelectionSortA_Click" FontFamily="Century Gothic"/>
-
-        <!-- Sensor A: Insertion Sort Controls -->
-        <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="236,333,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtInsertionSortA" HorizontalAlignment="Left" Margin="241,374,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
-        <Button Content="Sort" HorizontalAlignment="Left" Margin="241,352,0,0" VerticalAlignment="Top" Width="72" FontSize="10" Click="btnInsertionSortA_Click"  FontFamily="Century Gothic"/>
-        
-        <!-- Sensor A Listbox -->
-        <ListBox x:Name="lstSensorA" SelectionMode="Multiple" Margin="384,60,298,10" FontFamily="Century Gothic" ItemContainerStyle="{StaticResource ChangeSelectedItemBackground}"/>
-
-        <!-- Sensor B Controls -->
-        <Label Content="Sensor B" HorizontalAlignment="Left" Margin="526,20,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="20" RenderTransformOrigin="0.539,0.957"/>
-
-        <!-- Sensor B: Binary Search Iterative Controls -->
-        <Label Content="Binary Search Iterative" HorizontalAlignment="Left" Margin="524,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtBinaryIterativeB" HorizontalAlignment="Left" Margin="529,102,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only-->
-        <Button Content="Search" Click="btnBinarySearchIterativeB_Click" HorizontalAlignment="Left" Margin="529,80,0,0" VerticalAlignment="Top" Width="72" FontSize="10" FontFamily="Century Gothic"/>
-
-        <!-- Sensor B: Binary Search Recursive Controls -->
-        <Label Content="Binary Search Recursive" HorizontalAlignment="Left" Margin="524,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtBinaryRecursiveB" HorizontalAlignment="Left" Margin="529,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
-        <Button Content="Search" Click="btnBinarySearchRecursiveB_Click" HorizontalAlignment="Left" Margin="529,153,0,0" VerticalAlignment="Top" Width="72" FontSize="10" FontFamily="Century Gothic"/>
-
-        <!-- Sensor B: Search Target -->
-        <Label Content="Search Target" HorizontalAlignment="Left" Margin="526,214,0,0" VerticalAlignment="Top" Width="81" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtTargetB" HorizontalAlignment="Left" Margin="607,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52" RenderTransformOrigin="0.5,0.705" FontSize="10" FontFamily="Century Gothic"
-                 PreviewTextInput="NumericOnly_PreviewTextInput"/>
-
-        <!-- Sensor B: Selection Sort -->
-        <Label Content="Selection Sort" HorizontalAlignment="Left" Margin="524,258,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtSelectionSortB" HorizontalAlignment="Left" Margin="529,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
-        <Button Content="Sort" Click="btnSelectionSortB_Click" HorizontalAlignment="Left" Margin="529,277,0,0" VerticalAlignment="Top" Width="72" FontSize="10" FontFamily="Century Gothic"/>
-
-        <!-- Sensor B: Insertion Sort -->
-        <Label Content="Insertion Sort" HorizontalAlignment="Left" Margin="524,329,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.263,-0.422" Height="23" FontSize="10" FontFamily="Century Gothic"/>
-        <TextBox x:Name="txtInsertionSortB" HorizontalAlignment="Left" Margin="529,370,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="10" FontFamily="Century Gothic" IsReadOnly="True"/> <!-- Read Only -->
-        <Button Content="Sort" Click="btnInsertionSortB_Click" HorizontalAlignment="Left" Margin="529,348,0,0" VerticalAlignment="Top" Width="72" FontSize="10" FontFamily="Century Gothic"/>
-        
-        <!-- Sensor B Listbox -->
-        <ListBox x:Name="lstSensorB" SelectionMode="Multiple" Margin="672,60,10,10" FontFamily="Century Gothic" ItemContainerStyle="{StaticResource ChangeSelectedItemBackground}"/>
-        
+    <Border Padding="20" Background="#f8f7f9">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
 
+            <Border CornerRadius="25">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#e2d4e0" Offset="0"/>
+                        <GradientStop Color="#8488b5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <StackPanel>
+                <StackPanel HorizontalAlignment="Center" Margin="0, 10, 0, 10">
+                    <Grid>
+                        <Label Content="M S S S" FontSize="60" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
+                        <Label Content="Marlin Space Science Systems" HorizontalAlignment="Center" Margin="0, 68, 0, 0" FontSize="10" FontFamily="Century Gothic"/>
+                    </Grid>
+                </StackPanel>
 
 
+                <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                    <!-- Numeric Control for Standard Deviation -->
+                    <Label Content="Sigma" FontFamily="Century Gothic" FontSize="14" Padding="40, 5, 20, 5"/>
+                    <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="80">
+                        <wpfx:IntegerUpDown x:Name="txtSigma" Text="10" FontFamily="Century Gothic" FontSize="12" Padding="10 0 0 0" Height="30" Width="80"
+                                            VerticalAlignment="Center"  HorizontalAlignment="Center" TextAlignment="Left" Background="Transparent" BorderThickness="0"   
+                                            FormatString="N0" Minimum="10" Maximum="20"/>
+                        <!-- 4.13 Sigma Minimum=10, Maximum=20, Default=10-->
+                    </Border>
 
-    </Grid>
+                    <!-- Numeric Control for Mean -->
+                    <Label Content="Mu" FontFamily="Century Gothic" FontSize="14" Padding="60, 5, 20, 5"/>
+                    <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="80">
+                        <wpfx:IntegerUpDown x:Name="txtMean" Text="50" FontFamily="Century Gothic" FontSize="12" Padding="10 0 0 0" Height="30" Width="80"
+                        VerticalAlignment="Center"  HorizontalAlignment="Center" TextAlignment="Left" Background="Transparent" BorderThickness="0"   
+                        FormatString="N0" Minimum="35" Maximum="75" DefaultValue="50"/>
+                        <!--4.13 Mean Minimum=35, Maximum=75, Default=50-->
+                    </Border>
+                </StackPanel>
+
+                <!-- Button to Load Sensor Data -->
+                <Button x:Name="btnLoadData" Content="Load Sensor Data" FontFamily="Century Gothic" FontSize="12" Height="30" Width="325" Grid.Column="1" 
+                        HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 10, 0, 10"  Click="btnLoadData_Click" Style="{StaticResource ChangeHoverColor}"/>
+
+                <!-- Two column ListView for Sensor Data-->
+                <StackPanel Orientation="Vertical" Width="325" Margin="0, 0, 0, 50">
+                    <ListView x:Name="lvSensorData" FontFamily="Century Gothic" FontSize="12" Padding="0, 2, 2, 0" MaxHeight="460" ItemContainerStyle="{StaticResource ChangeHoverColorListView}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Sensor A" DisplayMemberBinding="{Binding SensorA}" Width="150"/>
+                                <GridViewColumn Header="Sensor B" DisplayMemberBinding="{Binding SensorB}" Width="150"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+                
+            </StackPanel>
+
+            <Border Grid.Column="1" Grid.ColumnSpan="2" Margin="10">
+                <Label Content="Sensor A" FontFamily="Century Gothic" FontSize="30" Margin="25,80,0,0"/>
+            </Border>
+
+            <Border Grid.Column="1" Margin="10" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,170,0,0">
+                    
+                    <!-- Sensor A: Binary Search Iterative -->
+                    <Label Content="Binary Search Iterative" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Center"/>
+                    <Button x:Name="btnBinarySearchIterativeA" Content="Search" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnBinarySearchIterativeA_Click" Style="{StaticResource ChangeHoverColor}"/>
+                    <TextBox x:Name="txtBinaryIterativeA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+
+                    <!-- Sensor A: Binary Search Recursive -->
+                    <Label Content="Binary Search Recursive" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Center"/>
+                    <Button x:Name="btnBinarySearchRecursiveA" Content="Search" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnBinarySearchRecursiveA_Click" Style="{StaticResource ChangeHoverColor}"/>
+                    <TextBox x:Name="txtBinaryRecursiveA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                    
+                    <!-- Sensor A: Search Target -->
+                    <Label Content="Search Target" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left" />
+                    <TextBox x:Name="txtTargetA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" PreviewTextInput="NumericOnly_PreviewTextInput"/>
+                
+                    <!-- Sensor A: Selection Sort -->
+                    <Label Content="Selection Sort" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left"/>
+                    <Button x:Name="btnSelectionSortA" Content="Sort" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnSelectionSortA_Click" Style="{StaticResource ChangeHoverColor}"/>
+                    <TextBox x:Name="txtSelectionSortA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                
+                    <!-- Sesnsor A: Insertion Sort -->
+                    <Label Content="Insertion Sort" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left"/>
+                    <Button x:Name="btnInsertionSortA" Content="Sort" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnInsertionSortA_Click" Style="{StaticResource ChangeHoverColor}"/>
+                    <TextBox x:Name="txtInsertionSortA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Sensor A Listbox -->
+            <ListBox x:Name="lstSensorA" SelectionMode="Multiple" FontFamily="Century Gothic" FontSize="12" Padding="0, 2, 2, 0" Margin="0, 185, 0,50" Grid.Column="2" ItemContainerStyle="{StaticResource ChangeSelectedItemBackground}"/>
+
+            <Border Grid.Column="3" Grid.ColumnSpan="2" Margin="10">
+                <Label Content="Sensor B" FontFamily="Century Gothic" FontSize="30" Margin="25,80,0,0"/>
+            </Border>
+
+            <Border Grid.Column="3" Margin="10" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,170,0,0">
+
+                    <!-- Sensor B: Binary Search Iterative -->
+                    <Label Content="Binary Search Iterative" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Center"/>
+                    <Button x:Name="btnBinarySearchIterativeB" Content="Search" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnBinarySearchIterativeB_Click" Style="{StaticResource ChangeHoverColor}"/>
+                    <TextBox x:Name="txtBinaryIterativeB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+
+                    <!-- Sensor B: Binary Search Recursive -->
+                    <Label Content="Binary Search Recursive" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Center"/>
+                    <Button x:Name="btnBinarySearchRecursiveB" Content="Search" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnBinarySearchRecursiveB_Click" Style="{StaticResource ChangeHoverColor}"/>
+                    <TextBox x:Name="txtBinaryRecursiveB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+
+                    <!-- Sensor B: Search Target -->
+                    <Label Content="Search Target" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left" />
+                    <TextBox x:Name="txtTargetB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" PreviewTextInput="NumericOnly_PreviewTextInput"/>
+
+                    <!-- Sensor B: Selection Sort -->
+                    <Label Content="Selection Sort" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left"/>
+                    <Button x:Name="btnSelectionSortB" Content="Sort" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnSelectionSortB_Click" Style="{StaticResource ChangeHoverColor}"/>
+                    <TextBox x:Name="txtSelectionSortB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+
+                    <!-- Sesnsor B: Insertion Sort -->
+                    <Label Content="Insertion Sort" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left"/>
+                    <Button x:Name="btnInsertionSortB" Content="Sort" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnInsertionSortB_Click" Style="{StaticResource ChangeHoverColor}"/>
+                    <TextBox x:Name="txtInsertionSortB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                </StackPanel>
+            </Border>
+            
+            <!-- Sensor B Listbox -->
+            <ListBox x:Name="lstSensorB" SelectionMode="Multiple" FontFamily="Century Gothic" FontSize="12" Padding="0, 2, 2, 0" Margin="0, 185, 0,50" Grid.Column="4" ItemContainerStyle="{StaticResource ChangeSelectedItemBackground}"/>
+
+        </Grid>
+    </Border>
 </Window>

@@ -4,12 +4,8 @@
              xmlns:local="clr-namespace:MSSS_SatelliteDataProcessing"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!-- Center Text in List View -->
-        <Style TargetType="ListViewItem">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        </Style>
-
+        
+        <!-- Change Selected Item Background in ListBox -->
         <Style x:Key="ChangeSelectedItemBackground" TargetType="ListBoxItem">
             <Setter Property="Template">
                 <Setter.Value>
@@ -19,18 +15,58 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="true">
-                                <Setter TargetName="Bd" Property="Background" Value="#CEE8F0"/>
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#FF6DBDD1"/>
+                                <Setter TargetName="Bd" Property="Background" Value="#dedeea"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#8488b5"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter TargetName="Bd" Property="Background" Value="#FFBEE6FD"/>
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#FF3C7FB1"/>
+                                <Setter TargetName="Bd" Property="Background" Value="#dedeea"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#8488b5"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
+        <!-- Change Selected Item Background in ListBox -->
+        <Style x:Key="ChangeHoverColorListView" TargetType="{x:Type ListViewItem}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#dedeea"/>
+                    <Setter Property="BorderBrush" Value="#8488b5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Change Button Hover Color -->
+        <Style x:Key="ChangeHoverColor" TargetType="Button">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="Background" Value="#f8f7f9"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="BorderThickness" Value="0.5"/>
+                    <Setter Property="Background" Value="#bcb9d8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+
+
     </Application.Resources>
 </Application>

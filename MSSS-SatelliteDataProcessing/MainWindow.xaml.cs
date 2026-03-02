@@ -63,7 +63,7 @@ namespace MSSS_SatelliteDataProcessing
 
             // generates 400 data points for Sensor A and B using Galileo6
             // and adds them to their respective linked list
-            for (int i = 0; i <= 400; i++)
+            for (int i = 0; i < 400; i++)
             {
                 SensorA.AddLast(data.SensorA(mu, sigma));
                 SensorB.AddLast(data.SensorB(mu, sigma));
