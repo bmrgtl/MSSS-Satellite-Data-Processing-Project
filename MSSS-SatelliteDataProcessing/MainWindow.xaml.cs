@@ -43,23 +43,9 @@ namespace MSSS_SatelliteDataProcessing
             // creates new instance of ReadData class from Galileo6 to generate data for SensorA and SensorB
             ReadData data = new ReadData();
 
-            // 4.13 Sigma Range (10-20; Default 10)
-            double sigma = double.Parse(txtSigma.Text);
-            if(sigma < 10 || sigma > 20)
-            {
-                MessageBox.Show("Default Value 10 is used. Please enter a value for standard deviation between 10 and 20.");
-                sigma = 10; // default value if input is out of range
-                txtSigma.Value = 10;
-            }
-
-            // 4.13 Mean Range (35-75; Default 50)
-            double mu = double.Parse(txtMean.Text);
-            if(mu < 35 || mu > 75)
-            {
-                MessageBox.Show("Default Value 50 is used. Please enter a value for mean between 35 and 75.");
-                mu = 50; // default value if input is out of range
-                txtMean.Value = 50;
-            }
+            double sigma = txtSigma.Value ?? 10;
+            double mu = txtMean.Value ?? 50;
+            
 
             // generates 400 data points for Sensor A and B using Galileo6
             // and adds them to their respective linked list
@@ -67,6 +53,26 @@ namespace MSSS_SatelliteDataProcessing
             {
                 SensorA.AddLast(data.SensorA(mu, sigma));
                 SensorB.AddLast(data.SensorB(mu, sigma));
+            }
+        }
+        // 4.13 Sigma Range (10-20; Default 10)
+        private void ValidateSigma()
+        {
+            if (txtSigma.Value == null || txtSigma.Value < 10 || txtSigma.Value > 20)
+            {
+                MessageBox.Show("Standard Deviation must be between 10 and 20. Default Value 10 is used.");
+                txtSigma.Value = 10; // default value if input is out of range
+            }
+
+        }
+
+        // 4.13 Mean Range (35-75; Default 50)
+        private void ValidateMean()
+        {
+            if (txtMean.Value == null || txtMean.Value < 35 || txtMean.Value > 75)
+            {
+                MessageBox.Show("Mean must be between 35 and 75. Default Value 50 is used.");
+                txtMean.Value = 50; // default value if input is out of range
             }
         }
 
@@ -90,6 +96,9 @@ namespace MSSS_SatelliteDataProcessing
         // 4.4 On click event handler that loads and shows sensor data
         private void btnLoadData_Click(object sender, RoutedEventArgs e)
         {
+            ValidateSigma();
+            ValidateMean();
+
             LoadData();
             ShowAllSensorData();
             DisplayListboxData(SensorA, lstSensorA);

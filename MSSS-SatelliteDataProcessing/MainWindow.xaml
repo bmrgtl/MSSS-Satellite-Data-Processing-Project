@@ -42,19 +42,17 @@
                     <!-- Numeric Control for Standard Deviation -->
                     <Label Content="Sigma" FontFamily="Century Gothic" FontSize="14" Padding="40, 5, 20, 5"/>
                     <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="80">
-                        <wpfx:IntegerUpDown x:Name="txtSigma" Text="10" FontFamily="Century Gothic" FontSize="12" Padding="10 0 0 0" Height="30" Width="80"
+                        <wpfx:IntegerUpDown x:Name="txtSigma" Value="10" FontFamily="Century Gothic" FontSize="12" Padding="10 0 0 0" Height="30" Width="80"
                                             VerticalAlignment="Center"  HorizontalAlignment="Center" TextAlignment="Left" Background="Transparent" BorderThickness="0"   
-                                            FormatString="N0" Minimum="10" Maximum="20"/>
-                        <!-- 4.13 Sigma Minimum=10, Maximum=20, Default=10-->
+                                            FormatString="N0" />
                     </Border>
 
                     <!-- Numeric Control for Mean -->
                     <Label Content="Mu" FontFamily="Century Gothic" FontSize="14" Padding="60, 5, 20, 5"/>
                     <Border BorderThickness="0.5" BorderBrush="Gray" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="80">
-                        <wpfx:IntegerUpDown x:Name="txtMean" Text="50" FontFamily="Century Gothic" FontSize="12" Padding="10 0 0 0" Height="30" Width="80"
-                        VerticalAlignment="Center"  HorizontalAlignment="Center" TextAlignment="Left" Background="Transparent" BorderThickness="0"   
-                        FormatString="N0" Minimum="35" Maximum="75" DefaultValue="50"/>
-                        <!--4.13 Mean Minimum=35, Maximum=75, Default=50-->
+                        <wpfx:IntegerUpDown x:Name="txtMean" Value="50" FontFamily="Century Gothic" FontSize="12" Padding="10 0 0 0" Height="30" Width="80"
+                                            VerticalAlignment="Center"  HorizontalAlignment="Center" TextAlignment="Left" Background="Transparent" BorderThickness="0"   
+                                            FormatString="N0"/>
                     </Border>
                 </StackPanel>
 
