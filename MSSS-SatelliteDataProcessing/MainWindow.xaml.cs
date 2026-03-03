@@ -61,6 +61,7 @@ namespace MSSS_SatelliteDataProcessing
             if (txtSigma.Value == null || txtSigma.Value < 10 || txtSigma.Value > 20)
             {
                 MessageBox.Show("Standard Deviation must be between 10 and 20. Default Value 10 is used.");
+                lblStatusLoadData.Content = "Standard Deviation must be between 10 and 20. Default Value 10 is used.";
                 txtSigma.Value = 10; // default value if input is out of range
             }
 
@@ -72,6 +73,7 @@ namespace MSSS_SatelliteDataProcessing
             if (txtMean.Value == null || txtMean.Value < 35 || txtMean.Value > 75)
             {
                 MessageBox.Show("Mean must be between 35 and 75. Default Value 50 is used.");
+                lblStatusLoadData.Content = "Standard Deviation must be between 35 and 75. Default Value 50 is used.";
                 txtMean.Value = 50; // default value if input is out of range
             }
         }
@@ -101,8 +103,11 @@ namespace MSSS_SatelliteDataProcessing
 
             LoadData();
             ShowAllSensorData();
+            lblStatusLoadData.Content = "Data Loaded Successfully";
             DisplayListboxData(SensorA, lstSensorA);
+            lblStatusSensorA.Content = $"Sensor A: {NumberOfNodes(SensorA)} Data Points Loaded";
             DisplayListboxData(SensorB, lstSensorB);
+            lblStatusSensorB.Content = $"Sensor B: {NumberOfNodes(SensorB)} Data Points Loaded";
         }
 
         // 4.5 Number of Nodes: returns number of nodes in the linked list
@@ -124,6 +129,14 @@ namespace MSSS_SatelliteDataProcessing
         // 4.7 Selection Sort
         private bool SelectionSort(LinkedList<double> sensorData)
         {
+            // check if sensor data is empty before sorting
+            if(sensorData.Count == 0)
+            {
+                MessageBox.Show("Please load data to sort.");
+                return false; // No data to sort
+            }
+
+
             int min = 0;
             int max = NumberOfNodes(sensorData);
 
@@ -160,18 +173,31 @@ namespace MSSS_SatelliteDataProcessing
         // 4.8 Insertion Sort
         private bool InsertionSort(LinkedList<double> sensorData)
         {
+            // checks if sensor data is empty before sorting
+            if (sensorData.Count == 0)
+            {
+                MessageBox.Show("Please load data to sort.");
+                return false; // No data to sort
+            }
+
             int max = NumberOfNodes(sensorData);
 
+            // iterates through linked list
             for (int i = 0; i < max - 1; i++)
             {
+                // compares the current element with the next element in the list
                 for (int j = i + 1; j > 0; j--)
                 {
+                    // if the current element is greater than the next element, it swaps their positions in the list
                     if (sensorData.ElementAt(j - 1) > sensorData.ElementAt(j))
                     {
+
                         LinkedListNode<double> current = sensorData.Find(sensorData.ElementAt(j));
                         LinkedListNode<double> previous = sensorData.Find(sensorData.ElementAt(j - 1));
 
+                        // swaps the values of the current node and the previous node
                         var temp = current.Value;
+                        // updates the value of the current node to the value of the previous node
                         current.Value = previous.Value;
                         previous.Value = temp;
                     }
@@ -184,7 +210,7 @@ namespace MSSS_SatelliteDataProcessing
         // 4.9 Binary Search Iterative
         private int BinarySearchIterative(LinkedList<double> sensorData, double target, int min, int max)
         {
-            while (min <= max - 1)
+            while (min <= max)
             {
                 int mid = (min + max) / 2;
 
@@ -203,7 +229,7 @@ namespace MSSS_SatelliteDataProcessing
         // 4.10 Binary Search Recursive
         private int BinarySearchRecursive(LinkedList<double> sensorData, double target, int min, int max)
         {
-            if (min <= max - 1)
+            if (min <= max)
             {
                 int mid = (min + max) / 2;
 
@@ -253,6 +279,7 @@ namespace MSSS_SatelliteDataProcessing
                 if (!double.TryParse(txtTargetA.Text, out double target))
                 {
                     MessageBox.Show("Please enter a valid number for the target value.");
+                    lblStatusSensorA.Content = "Invalid input for target value.";
                     return;
                 }
 
@@ -261,26 +288,50 @@ namespace MSSS_SatelliteDataProcessing
                 stopwatch.Start();
 
                 // start Binary Search
-                int index = BinarySearchIterative(SensorA, target, 0, NumberOfNodes(SensorA));
+                int index = BinarySearchIterative(SensorA, target, 0, NumberOfNodes(SensorA)-1);
                 stopwatch.Stop();
 
+                txtTargetA.Clear(); // Clear the target input after search
                 // 4.11.1 Display ticks taken for binary search iterative method in the corresponding textbox
                 txtBinaryIterativeA.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
 
-                if(index == -1)
+                if (index == -1)
                 {
+                    lstSensorA.SelectedItems.Clear(); // Clear any previous selections
                     MessageBox.Show("Value Not Found.");
+                    lblStatusSensorA.Content = $"Value {target} not found.";
+
+                    if (target < SensorA.Min())
+                    {
+                        lstSensorA.ScrollIntoView(lstSensorA.Items[0]); // Scroll to the first item if target is less than minimum
+                    }
+                    else if ( target > SensorA.Max())
+                    {
+                        lstSensorA.ScrollIntoView(lstSensorA.Items[NumberOfNodes(SensorA) - 1]); // Scroll to the last item if target is greater than maximum
+                    }
                 }
 
                 else
+                {
                     // 4.11.1 Highlight all values that are equal to the target (decimals excluded).
                     HighlightAllOccurrences(SensorA, lstSensorA, index, target);
-                                
+                    lblStatusSensorA.Content = $"Value {target} found.";
+                }              
             }
 
             else
             {
-                MessageBox.Show("Please sort the data before performing binary search.");
+                if (SensorA.Count == 0)
+                {
+                    MessageBox.Show("Please load data to search.");
+                    lblStatusSensorA.Content = "Load data before searching.";
+                }
+                else
+                {
+                    MessageBox.Show("Please sort the data before performing binary search.");
+                    lblStatusSensorA.Content = "Sort data before searching.";
+                }
+                    
             }
 
         }
@@ -295,31 +346,57 @@ namespace MSSS_SatelliteDataProcessing
                 if (!double.TryParse(txtTargetA.Text, out double target))
                 {
                     MessageBox.Show("Please enter a valid number for the target value.");
+                    lblStatusSensorA.Content = "Invalid input for target value.";
                     return;
                 }
 
                 // 4.11.2 Measure ticks taken for binary search recursive method
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 stopwatch.Start();
-                int index = BinarySearchRecursive(SensorA, target, 0, NumberOfNodes(SensorA));
+                int index = BinarySearchRecursive(SensorA, target, 0, NumberOfNodes(SensorA)-1);
                 stopwatch.Stop();
 
+                txtTargetA.Clear();
                 // 4.11.2 Display ticks taken for binary search iterative method in the corresponding textbox
                 txtBinaryRecursiveA.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
 
                 if (index == -1)
                 {
+                    lstSensorA.SelectedItems.Clear(); // Clear any previous selections
                     MessageBox.Show("Value Not Found.");
+                    lblStatusSensorA.Content = $"Value {target} not found.";
+
+                    if (target < SensorA.Min())
+                    {
+                        lstSensorA.ScrollIntoView(lstSensorA.Items[0]); // Scroll to the first item if target is less than minimum
+                    }
+                    else if (target > SensorA.Max())
+                    {
+                        lstSensorA.ScrollIntoView(lstSensorA.Items[NumberOfNodes(SensorA) - 1]); // Scroll to the last item if target is greater than maximum
+                    }
                 }
 
                 else
+                {
                     // 4.11.2 Highlight all values that are equal to the target (decimals excluded).
                     HighlightAllOccurrences(SensorA, lstSensorA, index, target);
+                    lblStatusSensorA.Content = $"Value {target} found.";
+                }
             }
 
             else
             {
-                MessageBox.Show("Please sort the data before performing binary search.");
+                if(SensorA.Count == 0)
+                {
+                    MessageBox.Show("Please load data to search.");
+                    lblStatusSensorA.Content = "Load data before searching.";
+                }
+                else
+                {
+                    MessageBox.Show("Please sort the data before performing binary search.");
+                    lblStatusSensorA.Content = "Sort data before searching.";
+                }
+                    
             }
         }
 
@@ -333,30 +410,56 @@ namespace MSSS_SatelliteDataProcessing
                 if (!double.TryParse(txtTargetB.Text, out double target))
                 {
                     MessageBox.Show("Please enter a valid number for the target value.");
+                    lblStatusSensorB.Content = "Invalid input for target value.";
                     return;
                 }
 
                 // 4.11.3 Measure ticks taken for binary search iterative method
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 stopwatch.Start();
-                int index = BinarySearchIterative(SensorB, target, 0, NumberOfNodes(SensorB));
+                int index = BinarySearchIterative(SensorB, target, 0, NumberOfNodes(SensorB)-1);
                 stopwatch.Stop();
 
+                txtTargetB.Clear();
                 // 4.11.3 Display ticks taken for binary search iterative method in the corresponding textbox
                 txtBinaryIterativeB.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
 
                 if (index == -1)
                 {
+                    lstSensorB.SelectedItems.Clear(); // Clear any previous selections
                     MessageBox.Show("Value Not Found.");
+                    lblStatusSensorB.Content = $"Value {target} not found.";
+
+                    if (target < SensorB.Min())
+                    {
+                        lstSensorB.ScrollIntoView(lstSensorB.Items[0]); // Scroll to the first item if target is less than minimum
+                    }
+                    else if (target > SensorB.Max())
+                    {
+                        lstSensorB.ScrollIntoView(lstSensorB.Items[NumberOfNodes(SensorB) - 1]); // Scroll to the last item if target is greater than maximum
+                    }
                 }
 
                 else
+                {
                     // 4.11.3 Highlight all values that are equal to the target (decimals excluded).
                     HighlightAllOccurrences(SensorB, lstSensorB, index, target);
+                    lblStatusSensorB.Content = $"Value {target} found.";
+                }
             }
             else
             {
-                MessageBox.Show("Please sort the data before performing binary search.");
+                if (SensorB.Count == 0)
+                {
+                    MessageBox.Show("Please load data to search.");
+                    lblStatusSensorB.Content = "Load data before searching.";
+                }
+                else
+                {
+                    MessageBox.Show("Please sort the data before performing binary search.");
+                    lblStatusSensorB.Content = "Sort data before searching.";
+                }
+                    
             }
         }
 
@@ -370,37 +473,69 @@ namespace MSSS_SatelliteDataProcessing
                 if (!double.TryParse(txtTargetB.Text, out double target))
                 {
                     MessageBox.Show("Please enter a valid number for the target value.");
+                    lblStatusSensorB.Content = "Invalid input for target value.";
                     return;
                 }
 
                 // 4.11.4 Measure ticks taken for binary search recursive method
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 stopwatch.Start();
-                int index = BinarySearchRecursive(SensorB, target, 0, NumberOfNodes(SensorB));
+                int index = BinarySearchRecursive(SensorB, target, 0, NumberOfNodes(SensorB)-1);
                 stopwatch.Stop();
 
-
+                txtTargetB.Clear();
                 // 4.11.4 Display ticks taken for binary search iterative method in the corresponding textbox
                 txtBinaryRecursiveB.Text = stopwatch.ElapsedTicks.ToString() + " Ticks";
 
                 if (index == -1)
                 {
+                    lstSensorB.SelectedItems.Clear(); // Clear any previous selections
                     MessageBox.Show("Value Not Found.");
+                    lblStatusSensorB.Content = $"Value {target} not found.";
+
+                    if (target < SensorB.Min())
+                    {
+                        lstSensorB.ScrollIntoView(lstSensorB.Items[0]); // Scroll to the first item if target is less than minimum
+                    }
+                    else if (target > SensorB.Max())
+                    {
+                        lstSensorB.ScrollIntoView(lstSensorB.Items[NumberOfNodes(SensorB) - 1]); // Scroll to the last item if target is greater than maximum
+                    }
                 }
 
                 else
+                {
                     // 4.11.4 Highlight all values that are equal to the target (decimals excluded).
                     HighlightAllOccurrences(SensorB, lstSensorB, index, target);
+                    lblStatusSensorB.Content = $"Value {target} found.";
+                }
             }
             else
             {
-                MessageBox.Show("Please sort the data before performing binary search.");
+                if (SensorB.Count == 0)
+                {
+                    MessageBox.Show("Please load data to search.");
+                    lblStatusSensorB.Content = "Load data before searching.";
+                }
+                else
+                {
+                    MessageBox.Show("Please sort the data before performing binary search.");
+                    lblStatusSensorB.Content = "Sort data before searching.";
+                }
+                    
             }
         }
 
         // 4.12.1 Method for Sensor A Selection Sort
         private void btnSelectionSortA_Click(object sender, RoutedEventArgs e)
         {
+            if(SelectionSort(SensorA) == false)
+            {
+                lblStatusSensorA.Content = "Please load data to sort.";
+                return; // Exit if sorting failed (e.g., no data to sort)
+            }
+
+
             // 4.12.1 Measures time taken to sort Sensor A data using selection sort method
             Stopwatch stopwatch = Stopwatch.StartNew();
             stopwatch.Start();
@@ -413,6 +548,7 @@ namespace MSSS_SatelliteDataProcessing
             // 4.12.1 Displays sorted Sensor A data in the corresponding listbox
             DisplayListboxData(SensorA, lstSensorA);
             ShowAllSensorData();
+            lblStatusSensorA.Content = "Data Sorted using Selection Sort";
             isSensorASorted = true;
 
         }
@@ -420,6 +556,12 @@ namespace MSSS_SatelliteDataProcessing
         //4.12.2 Method for Sensor A Insertion Sort
         private void btnInsertionSortA_Click(object sender, RoutedEventArgs e)
         {
+            if(InsertionSort(SensorA) == false)
+            {
+                lblStatusSensorA.Content = "Please load data to sort.";
+                return; // Exit if sorting failed (e.g., no data to sort)
+            }
+
             // 4.12.2 Measures time taken to sort Sensor A data using insertion sort method
             Stopwatch stopwatch = Stopwatch.StartNew();
             stopwatch.Start();
@@ -432,6 +574,7 @@ namespace MSSS_SatelliteDataProcessing
             // 4.12.2 Displays sorted Sensor A data in the corresponding listbox
             DisplayListboxData(SensorA, lstSensorA);
             ShowAllSensorData();
+            lblStatusSensorA.Content = "Data Sorted using Insertion Sort";
             isSensorASorted = true;
            
         }
@@ -439,6 +582,12 @@ namespace MSSS_SatelliteDataProcessing
         //4.12.3 Method for Sensor B Selection Sort
         private void btnSelectionSortB_Click(object sender, RoutedEventArgs e)
         {
+            if(SelectionSort(SensorB) == false)
+            {
+                lblStatusSensorB.Content = "Please load data to sort.";
+                return; // Exit if sorting failed (e.g., no data to sort)
+            }
+
             // 4.12.3 Measures time taken to sort Sensor B data using selection sort method
             Stopwatch stopwatch = Stopwatch.StartNew();
             stopwatch.Start();
@@ -451,6 +600,7 @@ namespace MSSS_SatelliteDataProcessing
             // 4.12.3 Displays sorted Sensor B data in the corresponding listbox
             DisplayListboxData(SensorB, lstSensorB);
             ShowAllSensorData();
+            lblStatusSensorB.Content = "Data Sorted using Selection Sort";
             isSensorBSorted = true;
             
         }
@@ -458,6 +608,12 @@ namespace MSSS_SatelliteDataProcessing
         //4.12.4 Method for Sensor B Insertion Sort
         private void btnInsertionSortB_Click(object sender, RoutedEventArgs e)
         {
+            if(InsertionSort(SensorB) == false)
+            {
+                lblStatusSensorB.Content = "Please load data to sort.";
+                return; // Exit if sorting failed (e.g., no data to sort)
+            }
+
             // 4.12.4 Measures time taken to sort Sensor B data using insertion sort method
             Stopwatch stopwatch = Stopwatch.StartNew();
             stopwatch.Start();
@@ -470,6 +626,7 @@ namespace MSSS_SatelliteDataProcessing
             //4.12.4 Displays sorted Sensor B data in the corresponding listbox
             DisplayListboxData(SensorB, lstSensorB);
             ShowAllSensorData();
+            lblStatusSensorB.Content = "Data Sorted using Insertion Sort";
             isSensorBSorted = true;
             
         }

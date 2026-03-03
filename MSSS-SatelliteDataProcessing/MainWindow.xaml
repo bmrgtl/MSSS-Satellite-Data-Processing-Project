@@ -70,7 +70,9 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
+                    <Label x:Name="lblStatusLoadData" FontFamily="Century Gothic" FontSize="12" HorizontalAlignment="Left" Grid.Column="0" FontStyle="Italic"/>
                 </StackPanel>
+
                 
             </StackPanel>
 
@@ -84,12 +86,12 @@
                     <!-- Sensor A: Binary Search Iterative -->
                     <Label Content="Binary Search Iterative" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Center"/>
                     <Button x:Name="btnBinarySearchIterativeA" Content="Search" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnBinarySearchIterativeA_Click" Style="{StaticResource ChangeHoverColor}"/>
-                    <TextBox x:Name="txtBinaryIterativeA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox x:Name="txtBinaryIterativeA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True" Cursor="No"/>
 
                     <!-- Sensor A: Binary Search Recursive -->
                     <Label Content="Binary Search Recursive" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Center"/>
                     <Button x:Name="btnBinarySearchRecursiveA" Content="Search" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnBinarySearchRecursiveA_Click" Style="{StaticResource ChangeHoverColor}"/>
-                    <TextBox x:Name="txtBinaryRecursiveA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox x:Name="txtBinaryRecursiveA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True" Cursor="No"/>
                     
                     <!-- Sensor A: Search Target -->
                     <Label Content="Search Target" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left" />
@@ -98,15 +100,17 @@
                     <!-- Sensor A: Selection Sort -->
                     <Label Content="Selection Sort" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left"/>
                     <Button x:Name="btnSelectionSortA" Content="Sort" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnSelectionSortA_Click" Style="{StaticResource ChangeHoverColor}"/>
-                    <TextBox x:Name="txtSelectionSortA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox x:Name="txtSelectionSortA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True" Cursor="No"/>
                 
                     <!-- Sesnsor A: Insertion Sort -->
                     <Label Content="Insertion Sort" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left"/>
                     <Button x:Name="btnInsertionSortA" Content="Sort" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnInsertionSortA_Click" Style="{StaticResource ChangeHoverColor}"/>
-                    <TextBox x:Name="txtInsertionSortA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox x:Name="txtInsertionSortA" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True" Cursor="No"/>
                 </StackPanel>
             </Border>
 
+
+            <Label x:Name="lblStatusSensorA" FontFamily="Century Gothic" FontSize="12" HorizontalAlignment="Left" Grid.Column="2" Margin="0, 160, 0, 0" FontStyle="Italic"/>
             <!-- Sensor A Listbox -->
             <ListBox x:Name="lstSensorA" SelectionMode="Multiple" FontFamily="Century Gothic" FontSize="12" Padding="0, 2, 2, 0" Margin="0, 185, 0,50" Grid.Column="2" ItemContainerStyle="{StaticResource ChangeSelectedItemBackground}"/>
 
@@ -120,12 +124,12 @@
                     <!-- Sensor B: Binary Search Iterative -->
                     <Label Content="Binary Search Iterative" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Center"/>
                     <Button x:Name="btnBinarySearchIterativeB" Content="Search" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnBinarySearchIterativeB_Click" Style="{StaticResource ChangeHoverColor}"/>
-                    <TextBox x:Name="txtBinaryIterativeB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox x:Name="txtBinaryIterativeB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True" Cursor="No"/>
 
                     <!-- Sensor B: Binary Search Recursive -->
                     <Label Content="Binary Search Recursive" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Center"/>
                     <Button x:Name="btnBinarySearchRecursiveB" Content="Search" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnBinarySearchRecursiveB_Click" Style="{StaticResource ChangeHoverColor}"/>
-                    <TextBox x:Name="txtBinaryRecursiveB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox x:Name="txtBinaryRecursiveB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True" Cursor="No"/>
 
                     <!-- Sensor B: Search Target -->
                     <Label Content="Search Target" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left" />
@@ -134,15 +138,16 @@
                     <!-- Sensor B: Selection Sort -->
                     <Label Content="Selection Sort" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left"/>
                     <Button x:Name="btnSelectionSortB" Content="Sort" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnSelectionSortB_Click" Style="{StaticResource ChangeHoverColor}"/>
-                    <TextBox x:Name="txtSelectionSortB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox x:Name="txtSelectionSortB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True" Cursor="No"/>
 
                     <!-- Sesnsor B: Insertion Sort -->
                     <Label Content="Insertion Sort" Margin="8, 20, 0, 0" FontFamily="Century Gothic" FontSize="14" HorizontalAlignment="Left"/>
                     <Button x:Name="btnInsertionSortB" Content="Sort" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Click="btnInsertionSortB_Click" Style="{StaticResource ChangeHoverColor}"/>
-                    <TextBox x:Name="txtInsertionSortB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox x:Name="txtInsertionSortB" FontFamily="Century Gothic" FontSize="12" Width="150" Height="25" Margin="5" TextWrapping="Wrap" IsReadOnly="True" Cursor="No"/>
                 </StackPanel>
             </Border>
-            
+
+            <Label x:Name="lblStatusSensorB" FontFamily="Century Gothic" FontSize="12" HorizontalAlignment="Left" Grid.Column="4" Margin="0, 160, 0, 0" FontStyle="Italic"/>
             <!-- Sensor B Listbox -->
             <ListBox x:Name="lstSensorB" SelectionMode="Multiple" FontFamily="Century Gothic" FontSize="12" Padding="0, 2, 2, 0" Margin="0, 185, 0,50" Grid.Column="4" ItemContainerStyle="{StaticResource ChangeSelectedItemBackground}"/>
 
