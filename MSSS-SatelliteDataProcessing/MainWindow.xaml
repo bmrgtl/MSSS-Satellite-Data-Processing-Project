@@ -6,7 +6,7 @@
         xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:MSSS_SatelliteDataProcessing"
         mc:Ignorable="d"
-        Title="Marlin Space Science Systems" Height="780" Width="1280"
+        Title="Malin Space Science Systems" Height="780" Width="1280"
         WindowStartupLocation="CenterScreen" Background="Transparent">
 
     <Border Padding="20" Background="#f8f7f9">
@@ -33,7 +33,7 @@
                 <StackPanel HorizontalAlignment="Center" Margin="0, 10, 0, 10">
                     <Grid>
                         <Label Content="M S S S" FontSize="60" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
-                        <Label Content="Marlin Space Science Systems" HorizontalAlignment="Center" Margin="0, 68, 0, 0" FontSize="10" FontFamily="Century Gothic"/>
+                        <Label Content="Malin Space Science Systems" HorizontalAlignment="Center" Margin="0, 68, 0, 0" FontSize="10" FontFamily="Century Gothic"/>
                     </Grid>
                 </StackPanel>
 
