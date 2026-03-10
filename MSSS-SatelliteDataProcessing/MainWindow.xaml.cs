@@ -1,4 +1,6 @@
 ﻿using Galileo6;
+using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,7 +12,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Diagnostics;
 
 namespace MSSS_SatelliteDataProcessing
 {
@@ -210,17 +211,21 @@ namespace MSSS_SatelliteDataProcessing
         // 4.9 Binary Search Iterative
         private int BinarySearchIterative(LinkedList<double> sensorData, double target, int min, int max)
         {
+            int decimalPlaces = GetNumberOfDecimals(target);
+
             while (min <= max)
             {
                 int mid = (min + max) / 2;
 
-                // binary search
-                if (target == Math.Floor(sensorData.ElementAt(mid)))
+
+                if (target == Math.Round(sensorData.ElementAt(mid), decimalPlaces))
                     return mid;
-                else if (target < Math.Floor(sensorData.ElementAt(mid)))
+                else if (target < Math.Round(sensorData.ElementAt(mid), decimalPlaces))
                     max = mid - 1;
                 else
                     min = mid + 1;
+
+
             }
 
             return -1;
@@ -229,13 +234,15 @@ namespace MSSS_SatelliteDataProcessing
         // 4.10 Binary Search Recursive
         private int BinarySearchRecursive(LinkedList<double> sensorData, double target, int min, int max)
         {
+            int decimalPlaces = GetNumberOfDecimals(target);
+
             if (min <= max)
             {
                 int mid = (min + max) / 2;
 
-                if (target == Math.Floor(sensorData.ElementAt(mid)))
+                if (target == Math.Round(sensorData.ElementAt(mid), decimalPlaces))
                     return mid;
-                else if (target < Math.Floor(sensorData.ElementAt(mid)))
+                else if (target < Math.Round(sensorData.ElementAt(mid), decimalPlaces))
                     return BinarySearchRecursive(sensorData, target, min, mid - 1);
                 else
                     return BinarySearchRecursive(sensorData, target, mid + 1, max);
@@ -244,7 +251,7 @@ namespace MSSS_SatelliteDataProcessing
             return -1; 
         }
 
-        //4.11 Try parser for target value input and display error message for invalid input
+        //4.11 Try parse for target value input and display error message for invalid input
         private double CheckTargetValue(string input, Label lblStatusSensor)
         {
             if (!double.TryParse(input, out double target))
@@ -263,23 +270,28 @@ namespace MSSS_SatelliteDataProcessing
             int firstOccurrence = index;
             int lastOccurrence = index + 1;
 
-            // find the first value
-            while (firstOccurrence >=0 && Math.Floor(SensorData.ElementAt(firstOccurrence)) == target)
+            // highlight all values that match the target
+            while (firstOccurrence >=0 && SensorData.ElementAt(firstOccurrence).ToString().StartsWith(target.ToString()))
             {
                 lstSensor.SelectedItems.Add(lstSensor.Items.GetItemAt(firstOccurrence));
                 firstOccurrence--;
             }
 
-            // find the last value
-            while (lastOccurrence < SensorData.Count && Math.Floor(SensorData.ElementAt(lastOccurrence)) == target)
+            while (lastOccurrence < SensorData.Count && SensorData.ElementAt(lastOccurrence).ToString().StartsWith(target.ToString()))
             {
                 lstSensor.SelectedItems.Add(lstSensor.Items.GetItemAt(lastOccurrence));
                 lastOccurrence++;
             }
-
+            // highlight closest value
             lstSensor.ScrollIntoView(lstSensor.Items[lastOccurrence-1]);
-            lblStatusSensor.Content = $"Value {target} found.";
-
+            if (SensorData.ElementAt(lastOccurrence-1).ToString().StartsWith(target.ToString()) || SensorData.ElementAt(firstOccurrence + 1).ToString().StartsWith(target.ToString()))
+                lblStatusSensor.Content = $"Value {target} found.";
+            else
+            {
+                lstSensor.SelectedItems.Add(lstSensor.Items.GetItemAt(index));
+                lblStatusSensor.Content = $"Closest Value Selected.";
+            }
+                
         }
 
         // 4.11 Handle not found cases for binary search methods
@@ -558,6 +570,19 @@ namespace MSSS_SatelliteDataProcessing
             // Regular expression to allow only numeric input (including decimal point)
             System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^0-9.]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        // get number of decimals
+        private int GetNumberOfDecimals (double target)
+        {
+            int decimalPlaces = 0;
+            target.ToString();
+            if (target.ToString().Contains('.'))
+            {
+                decimalPlaces = target.ToString().Split('.')[1].Length;
+            }
+
+            return decimalPlaces;
         }
 
     }
